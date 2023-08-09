@@ -12,6 +12,8 @@ function FormRegister({}) {
     return (  
         <StyledContainer $propsContainer >
             <StyledContainerForm>
+                <form>
+
                 <Title msn={"Registro"} />
 
                 <Input type={"text"} placeholder={"Nombre de usuario"}/>
@@ -27,6 +29,7 @@ function FormRegister({}) {
                     <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsText />
                 </DivisionText>
                 
+                </form>
             </StyledContainerForm>
                 
 
@@ -75,7 +78,7 @@ const StyledContainer = styled.div` //contenedor principal
     }
 `;
 
-const StyledContainerForm = styled.form`
+const StyledContainerForm = styled.div`
     width:100%;
     height: 100vh;
     form{
