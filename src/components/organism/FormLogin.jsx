@@ -73,6 +73,7 @@ function FormLogin({funcion}) {
     <StyledContainer>
 
         <StyledContainerForm>
+            <form>
             <Title msn={"Iniciar Sesión"} />
         
             <Input type={"text"} placeholder={"Nombre de usuario"} />
@@ -86,6 +87,7 @@ function FormLogin({funcion}) {
         <StyledLink>
             <Link to={"/SearchUser"}>¿Has olvidado la contraseña?</Link>
         </StyledLink>
+        </form>
         </StyledContainerForm>
 
 

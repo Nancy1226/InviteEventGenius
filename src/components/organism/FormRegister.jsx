@@ -96,7 +96,7 @@ const StyledContainerForm = styled.div`
         flex-direction:column;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 5px;
         background: #FCD8FF;
         }
     }
