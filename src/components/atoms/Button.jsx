@@ -25,7 +25,7 @@ const StyledButton = styled.button`
         cursor: pointer;
         transition: background-color .7s;
     }
-     @media (min-width:1024px) {
+    @media (min-width:1024px) {
         padding:3% 2%;
         width: 65%;
         font-size: 2rem;
