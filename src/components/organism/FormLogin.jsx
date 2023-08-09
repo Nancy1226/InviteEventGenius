@@ -11,7 +11,7 @@ const StyledContainer = styled.div` //contenedor principal
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 85vh;
+    height: 100vh;
     
     @media (min-width: 1024px){
         display: flex;
@@ -24,10 +24,18 @@ const StyledContainer = styled.div` //contenedor principal
 `;
 
 const StyledContainerForm = styled.div`
-    padding: 0;
+    /* padding: 0; */
     width:100%;
     height: 100vh;
-
+    form{
+        height: 100vh; 
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background: #FCD8FF;
+    }
     @media (min-width: 1024px){
         form{
         height: 100vh; 
@@ -49,8 +57,11 @@ const StyledLink = styled.div`
 `; 
 
 const StyledContainerImg = styled.div`
-    /* display: none; */
+    width: 100%;
+    height: 100%;
+    display: none;
     @media (min-width: 1024px) {
+        display: flex;
         width: 100%;
         height: 100%;
     }
