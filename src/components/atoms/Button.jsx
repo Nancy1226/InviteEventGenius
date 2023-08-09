@@ -18,13 +18,14 @@ const StyledButton = styled.button`
     line-height: normal;
     border: none;
     margin-top:10%;
-    width:100%;  
+    width:65%;
+    padding:3% 2%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     &:hover{
         cursor: pointer;
         transition: background-color .7s;
     }
-     @media (min-width:1024px) {
+    @media (min-width:1024px) {
         padding:3% 2%;
         width: 65%;
         font-size: 2rem;

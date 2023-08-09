@@ -23,7 +23,7 @@ const StyledContainer = styled.div` //contenedor principal
     }
 `;
 
-const StyledContainerForm = styled.div`
+const StyledContainerForm = styled.form`
     padding: 0;
     width:100%;
     height: 100vh;
@@ -36,16 +36,16 @@ const StyledContainerForm = styled.div`
         justify-content: center;
         align-items: center;
         gap: 20px;
-          background: #FCD8FF;
+        background: #FCD8FF;
         }
     }
 `;
 
 
 const StyledLink = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `; 
 
 const StyledContainerImg = styled.div`
@@ -56,30 +56,25 @@ const StyledContainerImg = styled.div`
     }
 `;
 
-
-
-function FormLogin({funcion}) {
+function FormLogin({}) {
     return ( 
     <>
     <StyledContainer>
 
         <StyledContainerForm>
-            <form>
             <Title msn={"Iniciar Sesión"} />
         
             <Input type={"text"} placeholder={"Nombre de usuario"} />
             <Input type={"password"} placeholder={"Contraseña"} />
         
         <StyledLink>
-          <Link to={"/SearchUser"}>¿Has olvidado la contraseña?</Link>
-          </StyledLink>
-          
-            <Button funcion={funcion} name={"Iniciar Sesion"}/>
+            <Link to={"/SearchUser"}>¿Has olvidado la contraseña?</Link>
+            </StyledLink>
+            <Button funcion="" name={"Iniciar Sesion"}/>
         
         <StyledLink>
-          <Link to={"/SearchUser"}>¿Has olvidado la contraseña?</Link>
-          </StyledLink>
-            </form>
+            <Link to={"/SearchUser"}>¿Has olvidado la contraseña?</Link>
+        </StyledLink>
         </StyledContainerForm>
 
 
