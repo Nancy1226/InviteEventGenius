@@ -4,7 +4,7 @@ const StyledContainer = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     text-align: center;
     font-family: Inter;
     font-size: 1.8rem;

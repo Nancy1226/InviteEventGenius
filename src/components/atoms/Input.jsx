@@ -12,7 +12,7 @@ const StyledContainerInput = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 10%;
-    margin-bottom: 5%;
+    /* margin-bottom: 5%; */
     text-align: justify;
 
 @media (min-width: 1024px){
@@ -26,7 +26,7 @@ const StyledContainerInput = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 10%;
-    margin-bottom: 5%;
+    margin-top: 2%;
     text-align: justify;
 }
 
@@ -34,7 +34,7 @@ const StyledContainerInput = styled.div`
 
 const StyledInput = styled.input`
     width:75%;
-    height: 50px;
+    height: 65px;
     padding: 0 3%;
     border-radius: 20px;
     border: 3px solid var(--electric-blue, #73E8FF);
@@ -43,17 +43,17 @@ const StyledInput = styled.input`
     outline: none;
     @media (min-width: 1024px){
         width: 65%;
-        height: 65px;
+        height: 60px;
         font-size: 1.7rem;
         /* font-size: 1.25rem; */
     }
 `;
 
-function Input({type, placeholder}) {
+function Input({type, placeholder,name, id,dato, valor}) {
     return ( 
     <>
     <StyledContainerInput>
-        <StyledInput type={type} placeholder={placeholder} />
+        <StyledInput type={type} placeholder={placeholder} name={name} id={id} value={dato} onChange={valor}/>
     </StyledContainerInput>
     </> 
     );
