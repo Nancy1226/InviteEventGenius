@@ -133,7 +133,7 @@ function FormLogin({ funcion }) {
                 <Button funcion={handleSubmit} name={"Iniciar Sesion"} estilo={true}/>
                 <WrapperLink>
                   <ContentText text={"¿Aun no  tienes una cuenta?"} propsText />
-                  <ContentLink to="/" link={"Que esperas, crea una ahora!"} />
+                  <ContentLink to="/register" link={"Que esperas, crea una ahora!"} />
                 </WrapperLink>
                 <DivisionText>
                   <ContentText
