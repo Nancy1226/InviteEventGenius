@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
+
 const Cl = styled.div`
     font-size: 1.5rem;
     .link{
