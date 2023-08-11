@@ -8,6 +8,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
+    color: black;
     background: #73E8FF;
     border-radius: 20px;
     text-align: center;
@@ -19,7 +20,7 @@ const StyledButton = styled.button`
     border: none;
     margin-top:2%;
     width:75%;
-    padding: 2.4% 3%;
+    padding: 2vh 3%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     &:hover{
         cursor: pointer;

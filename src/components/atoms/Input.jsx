@@ -12,7 +12,6 @@ const StyledContainerInput = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 10%;
-    /* margin-bottom: 5%; */
     text-align: justify;
 
 @media (min-width: 1024px){
@@ -34,7 +33,7 @@ const StyledContainerInput = styled.div`
 
 const StyledInput = styled.input`
     width:75%;
-    height: 65px;
+    height: 7vh;
     padding: 0 3%;
     border-radius: 20px;
     border: 3px solid var(--electric-blue, #73E8FF);

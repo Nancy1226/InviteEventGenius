@@ -8,7 +8,7 @@ const ContainerTextures1 = styled.div`
     top: 0;
     left:0;
     z-index: 1000;
-    width: 35%;
+    width: 30vw;
     @media (min-width: 1024px){          
     position: absolute;
     top: 0;
@@ -23,7 +23,7 @@ const ContainerTextures2 = styled.div`
     top: 0;
     right:0;
     z-index: 1000;
-    width: 40%;
+    width: 30vw;
     @media (min-width: 1024px){          
     position: absolute;
     top: 0;
@@ -36,7 +36,7 @@ const ContainerTextures2 = styled.div`
 const ContainerTextures3 = styled.div`
     /* border: 2px solid red; */
     position: absolute;
-    bottom:0%;
+    bottom: 0%;
     right: 0;
     z-index: 1000;
     width: 40%;
