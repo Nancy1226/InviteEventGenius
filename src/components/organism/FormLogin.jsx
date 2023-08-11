@@ -29,6 +29,7 @@ const StyledContainer = styled.div`
   }
 `;
 
+
 const StyledContainerForm = styled.div`
   width: 100%;
   height: 100vh;
@@ -68,6 +69,7 @@ const WrapperLink = styled.div`
   }
 `;
 
+
 const DivisionText = styled.div`
   display: flex;
   justify-content: center;
@@ -97,7 +99,6 @@ const StyledButton = styled.button`
 
 function FormLogin({ funcion }) {
   const [stateModal1, changeStateModal1] = useState(false);
-
 
   return (
     <>
