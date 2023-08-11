@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   border-radius: 20px;
   text-align: center;
   font-family: Inter;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
