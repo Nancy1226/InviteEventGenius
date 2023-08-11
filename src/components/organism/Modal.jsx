@@ -12,11 +12,13 @@ const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(3px);
   padding: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 `;
 
 const ContainerModal = styled.div`
@@ -25,7 +27,6 @@ const ContainerModal = styled.div`
     min-height: 100px;
     position: relative;
     border-radius: 30px;
-    /* border: 2px solid red; */
     background: #FFF;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.75);
     padding: 25px 10px;
@@ -36,7 +37,6 @@ const ContainerModal = styled.div`
     min-height: 100px;
     position: relative;
     border-radius: 30px;
-    /* border: 2px solid red; */
     background: #FFF;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.75);
     padding: 25px 10px;
@@ -49,15 +49,14 @@ const EncabezadoModal = styled.div`
   justify-content: space-between;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  /* border-bottom: 1px solid #E8E8E8; */
 `;
 
 const BotonExit = styled.button`
   position: absolute;
   top: 15px;
   right: 20px;
-  width: 6%;
-  height: 6%;
+  width: 40px;
+  height: 40px;
   border: none;
   background:none;
   cursor: pointer;
