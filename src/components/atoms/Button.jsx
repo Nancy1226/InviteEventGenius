@@ -33,11 +33,11 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ funcion, name, estilo }) {
+function Button({  name, estilo }) {
   return (
     <>
       <StyledContainer>
-        <StyledButton type={"button"} onSubmit={funcion} estilo={estilo}>
+        <StyledButton type={"submit"}  estilo={estilo}>
           {name}
         </StyledButton>
       </StyledContainer>
