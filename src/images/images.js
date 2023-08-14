@@ -8,4 +8,11 @@ export const images = {
     line2:"imgs/line2.svg",
     line3:"imgs/line3.svg",
     exit:"imgs/exit.svg",
+    profile:"imgs/profile.svg",
+    setting: "imgs/settings.svg",
+    photo:"imgs/photo.svg",
+    profilep:"imgs/profilep.svg",
+    security:"imgs/security.svg",
+    pay:"imgs/pay.svg",
+    cart:"imgs/cart.svg",
 };

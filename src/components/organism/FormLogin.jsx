@@ -105,12 +105,28 @@ function FormLogin({ funcion }) {
       <StyledContainer>
         <StyledContainerForm>
           <Formik
-            onSubmit={() => {
-              console.log("Formulario Enviado");
+            initialValues={{ username: '', password: '' }}
+            validate={values => {
+              const errors = {};
+              if (!values.username) {
+                errors.username = 'Required';
+              } else if (
+                !/^[A-Za-z0-9]+$/i.test(values.username) //modificar expresion si se requiere
+              ) {
+                errors.username = 'Nombre de usuario no valido';
+                //aqui puede ir la alerta
+              }
+              return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
             }}
           >
-            {({ handleSubmit }) => (
-              <form>
+            {({ values,errors,touched,handleChange,handleBlur,handleSubmit, isSubmitting, }) => (
+              <form onSubmit={handleSubmit}> 
                 <Title msn={"Iniciar Sesión"} />
 
                 <Input
@@ -118,19 +134,24 @@ function FormLogin({ funcion }) {
                   placeholder={"Nombre de usuario"}
                   id={"username"}
                   name={"username"}
+                  dato={values.username}
+                  valor={handleChange}
                 />
+                {errors.username && touched.username && errors.username}
                 <Input
                   type={"password"}
                   placeholder={"Contraseña"}
                   id={"password"}
                   name={"password"}
+                  dato={values.password}
+                  valor={handleChange}
                 />
-
+                {errors.password && touched.password && errors.password}
                 <StyledButton type="button" className="styledButton" onClick={() => changeStateModal1(!stateModal1) }> 
                   ¿Has olvidado la contraseña?
                 </StyledButton>
 
-                <Button funcion={handleSubmit} name={"Iniciar Sesion"} estilo={true}/>
+                <Button disabled={isSubmitting} name={"Iniciar Sesion"} estilo={true}/>
                 <WrapperLink>
                   <ContentText text={"¿Aun no  tienes una cuenta?"} propsText />
                   <ContentLink to="/" link={"Que esperas, crea una ahora!"} />
