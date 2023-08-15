@@ -23,7 +23,7 @@ function NavbarVertical() {
             </ul>
 
             <ul className="subcontainer-options">
-                <OptionsNav to={"/"} src={images.security} msn={"Seguridad"} />
+                <OptionsNav to={"/security"} src={images.security} msn={"Seguridad"} />
             </ul>
         </div>
 
