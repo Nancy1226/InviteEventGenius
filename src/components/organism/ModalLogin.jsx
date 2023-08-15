@@ -94,7 +94,7 @@ const Content = styled.div`
 `;
 
 
-function Modal({estado, cambiarEstado ,funcion}) {
+function ModalLogin({estado, cambiarEstado ,funcion}) {
   return (
     <>
     {estado && 
@@ -145,4 +145,4 @@ function Modal({estado, cambiarEstado ,funcion}) {
   );
 }
 
-export default Modal;
+export default ModalLogin;

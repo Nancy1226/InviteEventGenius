@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { images } from "../../images/images";
-import Modal from './Modal';
+import ModalLogin from './ModalLogin';
 import Title from "../atoms/Title";
 import Input from "../atoms/Input";
 import Image from "../atoms/Image";
@@ -170,7 +170,7 @@ function FormLogin({ funcion }) {
           </Formik>
         </StyledContainerForm>
           
-          <Modal 
+          <ModalLogin 
           estado={stateModal1}
           cambiarEstado = {changeStateModal1}
           />
