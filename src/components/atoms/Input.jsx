@@ -39,15 +39,59 @@ const StyledInput = styled.input`
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   outline: none;
+
   @media (min-width: 1024px) {
     width: 65%;
     height: 60px;
     font-size: 1.7rem;
     /* font-size: 1.25rem; */
+    ${props => props.$propsText &&`
+        width: 95%;
+        height: 7vh;
+        border: 0.3vh solid black;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
+
+    ${props => props.$propsCantNumber &&`
+        width: 80%;
+        height: 7vh;
+        border: 0.3vh solid black;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
+
+    ${props => props.$propsFile &&`
+        width: 70%;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
+
+    ${props => props.$propsDate &&`
+        width: 90%;
+        border: 0.3vh solid black;
+        height: 7vh;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
+
+    ${props => props.$propsTime &&`
+        width: 90%;
+        height: 7vh;
+        border: 0.3vh solid black;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
+
+    /* ${props => props.$propsImage &&`
+        width: 90%;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `} */
+
+    ${props => props.$propsInput &&`
+        width: 100%;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0);
+    `}
   }
+
 `;
 
-function Input({ type, placeholder, name, id, dato, valor }) {
+function Input({ type, placeholder, name, id, dato, valor, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime }) {
   return (
     <>
       <StyledContainerInput>
@@ -58,6 +102,13 @@ function Input({ type, placeholder, name, id, dato, valor }) {
           id={id}
           value={dato}
           onChange={valor}
+          $propsInput={propsInput}
+          $propsText={propsText}
+          $propsFile={propsFile}
+          accept={accept}
+          $propsCantNumber={propsCantNumber}
+          $propsDate={propsDate}
+          $propsTime={propsTime}
         />
       </StyledContainerInput>
     </>
