@@ -2,7 +2,6 @@ li{
     list-style: none;
 }
 .container-main{
-        padding: 1.2%;
         width: 20vw;
         height: 90vh;
         display: flex;
