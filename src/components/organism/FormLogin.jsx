@@ -130,21 +130,32 @@ function FormLogin() {
                   params: { email: values.email, password: values.password }
                 });
                 setApiData(response.data);
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Usuario encontrado',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-                navigate('/profile');
+
+                if (apiData.email === values.email && apiData.password === values.password) {
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Usuario encontrado',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  navigate('/profile');
+                }else{
+                  
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Usuario no encontrado',
+                    text: 'Correo o contraseña invalidos',
+                    footer: ''
+                  })
+                }
             
               } catch (error) {
         
 
                 Swal.fire({
                   icon: 'error',
-                  title: 'Usuario no encontrado',
+                  title: 'Campos vacios',
                   text: 'Porfavor, ingrese bien los datos',
                   footer: ''
                 })
