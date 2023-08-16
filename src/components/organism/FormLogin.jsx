@@ -1,7 +1,10 @@
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import { useState } from 'react';
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { images } from "../../images/images";
 import ModalLogin from './ModalLogin';
 import Title from "../atoms/Title";
@@ -97,32 +100,60 @@ const StyledButton = styled.button`
   }
 `;
 
-function FormLogin({ funcion }) {
+function FormLogin() {
   const [stateModal1, changeStateModal1] = useState(false);
+  const navigate = useNavigate();
+  const [apiData, setApiData] = useState(null);
 
   return (
     <>
       <StyledContainer>
         <StyledContainerForm>
           <Formik
-            initialValues={{ username: '', password: '' }}
+            initialValues={{ email: '', password: '' }}
             validate={values => {
               const errors = {};
-              if (!values.username) {
-                errors.username = 'Required';
+              if (!values.email) {
+                errors.email = 'CAMPOS VACIOS';
               } else if (
-                !/^[A-Za-z0-9]+$/i.test(values.username) //modificar expresion si se requiere
+                !/[a-zA-Z0-9_]+([a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/i.test(values.email) //modificar expresion si se requiere
               ) {
-                errors.username = 'Nombre de usuario no valido';
+                errors.email = 'Correo no valido';
                 //aqui puede ir la alerta
               }
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+              setTimeout( async () => {
+                try {
+                const response = await axios.get(`http://localhost:3002/usuario/${values.email}/${values.password}`, {
+                  params: { email: values.email, password: values.password }
+                });
+                setApiData(response.data);
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Usuario encontrado',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                navigate('/profile');
+            
+              } catch (error) {
+        
+
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Usuario no encontrado',
+                  text: 'Porfavor, ingrese bien los datos',
+                  footer: ''
+                })
+                
+                }
                 setSubmitting(false);
               }, 400);
+
+
             }}
           >
             {({ values,errors,touched,handleChange,handleBlur,handleSubmit, isSubmitting, }) => (
@@ -130,14 +161,14 @@ function FormLogin({ funcion }) {
                 <Title msn={"Iniciar Sesión"} />
 
                 <Input
-                  type={"text"}
-                  placeholder={"Nombre de usuario"}
-                  id={"username"}
-                  name={"username"}
-                  dato={values.username}
+                  type={"email"}
+                  placeholder={"Correo Electronico"}
+                  id={"email"}
+                  name={"email"}
+                  dato={values.email}
                   valor={handleChange}
                 />
-                {errors.username && touched.username && errors.username}
+                {errors.email && touched.email && errors.email}
                 <Input
                   type={"password"}
                   placeholder={"Contraseña"}
@@ -154,7 +185,7 @@ function FormLogin({ funcion }) {
                 <Button disabled={isSubmitting} name={"Iniciar Sesion"} estilo={true}/>
                 <WrapperLink>
                   <ContentText text={"¿Aun no  tienes una cuenta?"} propsText />
-                  <ContentLink to="/" link={"Que esperas, crea una ahora!"} />
+                  <ContentLink to="/register" link={"Que esperas, crea una ahora!"} />
                 </WrapperLink>
                 <DivisionText>
                   <ContentText
