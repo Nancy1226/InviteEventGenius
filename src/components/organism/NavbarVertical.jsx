@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom";
 import { images } from "../../images/images";
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
 import OptionsNav from "../molecules/OptionsNav";
 import "../styles/NavbarVertical.css"
 
-function NavbarVertical() {
+function NavbarVertical({src}) {
     return ( 
     <>
     <div className="container-main">{/* padre */}
@@ -12,7 +13,7 @@ function NavbarVertical() {
         <div className="subcontainer">
 
             <div className="subcontainer-img">
-           
+            
             <Image src={images.photo} />
             </div>
 
@@ -23,7 +24,7 @@ function NavbarVertical() {
             </ul>
 
             <ul className="subcontainer-options">
-                <OptionsNav to={"/security"} src={images.security} msn={"Seguridad"} />
+                <OptionsNav to={"/"} src={images.security} msn={"Seguridad"} />
             </ul>
         </div>
 

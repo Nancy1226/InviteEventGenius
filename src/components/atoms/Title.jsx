@@ -6,9 +6,10 @@ const StyledContainer = styled.div`
   width: 100%;
   margin-bottom: 5%;
   text-align: center;
-  font-family: 'Inter';
-  font-size: 1.5rem;
-  font-style: normal; 
+  font-family: Inter;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 400;
   line-height: normal;
 `;
 

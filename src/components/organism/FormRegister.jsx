@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import styled from "styled-components";
 import ContentLink from "../molecules/ContentLink";
 import { images } from "../../images/images";
@@ -8,19 +10,68 @@ import Button from "../atoms/Button";
 import ContentText from "../molecules/ContentText";
 
 
-function FormRegister({}) {
+function FormRegister() {
+
+
+    
+    const [formData, setFormData] = useState({
+        nameuser:'',
+        email:'',
+        password:'',
+        image: null,
+    });
+
+    const handleInputChange = (event) => {
+        const {name, value} = event.target;
+        setFormData((prevData) => ({ 
+            ...prevData,
+            [name] : value,
+        }));
+    };
+
+    const handleImageChange = (event) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            image: event.target.files[0],
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+    
+        try {
+            const response = await axios.post('http://localhost:3002/registrarUsuario', formDataToSend, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                },
+            });
+    
+          // Maneja la respuesta de la API según tus necesidades
+            console.log('Respuesta de la API:', response.data);
+        } catch (error) {
+          // Maneja los errores
+            console.error('Error al enviar el formulario:', error);
+        }
+    };
+
+
     return (  
         <StyledContainer $propsContainer >
-            <StyledContainerForm>
-                <form>
-
+            <StyledContainerForm >
+                <form onSubmit={handleSubmit}>
                 <Title msn={"Registro"} />
 
-                <Input type={"text"} placeholder={"Nombre de usuario"}/>
-                <Input type={"text"} placeholder={"Correo electronico"}/>
-                <Input type={"password"} placeholder={"Contraseña"}/>
+                <Input type={"text"} placeholder={"Nombre de usuario"} dato={formData.nameuser} valor={handleInputChange} name="nameuser"/>
+                <Input type={"text"} placeholder={"Correo electronico"} dato={formData.email} valor={handleInputChange} name="email"/>
+                <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password"/>
+                <Input type={"file"} placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/>
 
-                <Button funcion="" name={"Registro"}/>
+                <Button type={"submit"}  name={"Registro"} />
                 <WrapperLink>
                     <ContentText text="Ya tienes una cuenta?" propsText />
                     <ContentLink to="/" link="Inicia Sesión"/>
@@ -29,13 +80,14 @@ function FormRegister({}) {
                     <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsText />
                 </DivisionText>
                 </form>
-                
             </StyledContainerForm>
                 
 
             <StyledContainerImg>
                     <Image src={images.corean}/>
             </StyledContainerImg>
+
+
 
         </StyledContainer>
     );
@@ -98,7 +150,7 @@ const StyledContainerForm = styled.div`
         flex-direction:column;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        gap: 5px;
         background: #FCD8FF;
         }
     }

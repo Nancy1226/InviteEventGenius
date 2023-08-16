@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { images } from "../../images/images";
-import ModalLogin from './ModalLogin';
+import Modal from './Modal';
 import Title from "../atoms/Title";
 import Input from "../atoms/Input";
 import Image from "../atoms/Image";
@@ -31,7 +31,6 @@ const StyledContainer = styled.div`
     height: 100vh;
   }
 `;
-
 
 const StyledContainerForm = styled.div`
   width: 100%;
@@ -212,7 +211,7 @@ function FormLogin() {
           </Formik>
         </StyledContainerForm>
           
-          <ModalLogin 
+          <Modal 
           estado={stateModal1}
           cambiarEstado = {changeStateModal1}
           />
