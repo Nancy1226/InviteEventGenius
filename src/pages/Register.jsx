@@ -2,9 +2,7 @@ import FormRegister from "../components/organism/FormRegister";
 
 function Register() {
     return (  
-    <>
-        <FormRegister />
-    </> 
+        <FormRegister /> 
     );
 }
 
