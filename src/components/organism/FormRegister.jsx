@@ -8,12 +8,11 @@ import Input from "../atoms/Input";
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
 import ContentText from "../molecules/ContentText";
+import TextureLine from '../molecules/TextureLine';
 
 
 function FormRegister() {
 
-
-    
     const [formData, setFormData] = useState({
         nameuser:'',
         email:'',
@@ -29,12 +28,12 @@ function FormRegister() {
         }));
     };
 
-    const handleImageChange = (event) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            image: event.target.files[0],
-        }));
-    };
+    // const handleImageChange = (event) => {
+    //     setFormData((prevData) => ({
+    //         ...prevData,
+    //         image: event.target.files[0],
+    //     }));
+    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -69,7 +68,6 @@ function FormRegister() {
                 <Input type={"text"} placeholder={"Nombre de usuario"} dato={formData.nameuser} valor={handleInputChange} name="nameuser"/>
                 <Input type={"text"} placeholder={"Correo electronico"} dato={formData.email} valor={handleInputChange} name="email"/>
                 <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password"/>
-                <Input type={"file"} placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/>
 
                 <Button type={"submit"}  name={"Registro"} />
                 <WrapperLink>
@@ -79,6 +77,7 @@ function FormRegister() {
                 <DivisionText>
                     <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsText />
                 </DivisionText>
+                <TextureLine  propsTextLine1 propsTextLine2 propsTextLine3/>
                 </form>
             </StyledContainerForm>
                 
@@ -86,9 +85,6 @@ function FormRegister() {
             <StyledContainerImg>
                     <Image src={images.corean}/>
             </StyledContainerImg>
-
-
-
         </StyledContainer>
     );
 }

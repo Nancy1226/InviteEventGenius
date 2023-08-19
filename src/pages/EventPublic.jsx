@@ -1,7 +1,7 @@
 import ConfigEventPublic from "../components/organism/ConfigEventPublic";
 import Navbar from "../components/organism/Navbar";
 
-function Event(radius) {
+function EventPublic(radius) {
     return (  
         <>
             <Navbar/>
@@ -10,4 +10,4 @@ function Event(radius) {
     );
 }
 
-export default Event;
+export default EventPublic;

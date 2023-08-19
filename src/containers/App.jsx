@@ -2,7 +2,8 @@ import { BrowserRouter , Routes , Route } from "react-router-dom";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
-import Event from "../pages/Event";
+import EventPublic from "../pages/EventPublic";
+import EventPrivate from "../pages/EventPrivate";
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
           <Route path="/" element={<Login></Login>} > </Route>
           <Route path="/register" element={<Register></Register>} > </Route>
           <Route path="/profile" element={<Profile></Profile>} > </Route>
-          <Route path="/event" element={<Event/>} />
+          <Route path="/eventp" element={<EventPublic/>} />
+          <Route path="/eventpr" element={<EventPrivate/>} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,91 +1,105 @@
-import Input from "../atoms/Input";
+import InputText from "../atoms/InputText";
 import styled from "styled-components";
 import TittleG from "../atoms/TittleG";
 import Label from "../atoms/Label";
 import Button from "../atoms/Button";
 import Text from "../atoms/Text";
+import ModalBolets from "./ModalBolets";
+import { useState } from "react";
 
-function ConfigEventPublic() {
-
+function ConfigEventPrivate() {
+    const [stateModel1, changeStateModel1] = useState(true);
     return (  
         <ContentGlobal>
             <TittleG msn={"Configuracion de evento"}/>
 
             <ContentForm>
                 <ContentPrimario>
-                <Content1>
-                    <div className="label">
-                        <Label msn="Nombre del evento"/>
-                    </div>
-                    <Input type="text" propsText name="name" />
-                </Content1>
-                <Content2>
-                    <ContentSub1>
+                    <Content1>
                         <div className="label">
-                            <Label msn="Selecione cupos para el evento"/>
+                            <Label msn="Nombre del evento"/>
                         </div>
-                        <div className="content-option">
-                            <div className="option">
-                                <Input type="radio" propsInputRadio name="name"/>
-                                <Label msn="10"/>
+                        <InputText type="text" propsText name="name" />
+                    </Content1>
+                    <Content2>
+                        <ContentSub1>
+                            <div className="label">
+                                <Label msn="Selecione cupos para el evento"/>
                             </div>
-                            <div className="option">
-                                <Input type="radio" propsInputRadio name="name"/>
-                                <Label msn="20"/>
+                            <div className="content-option">
+                                <div className="option">
+                                    <InputText type="radio" propsInput name="name"/>
+                                    <Label msn="10"/>
+                                </div>
+                                <div className="option">
+                                    <InputText type="radio" propsInput name="name"/>
+                                    <Label msn="20"/>
+                                </div>
+                                <div className="option">
+                                    <InputText type="radio" propsInput name="name"/>
+                                    <Label msn="30"/>
+                                </div>
                             </div>
-                            <div className="option">
-                                <Input type="radio" propsInputRadio name="name"/>
-                                <Label msn="30"/>
+                        </ContentSub1>
+                        <ContentSub2>
+                            <div className="label">
+                                <Label msn="Ingrese otra cantidad"/>
                             </div>
-                        </div>
-                    </ContentSub1>
-                    <ContentSub2>
+                            <InputText type="number" propsCantNumber/>
+                        </ContentSub2>
+                    </Content2>
+                    <Content3>
                         <div className="label">
-                            <Label msn="Ingrese otra cantidad"/>
+                            <Text text="Aquí tendras la posibilidad de cargar y descargar un archivos .xml, para que puedas agrgar una lista de invitados a tu gusto." propsTextSub/>
                         </div>
-                        <Input type="number" propsCantNumber/>
-                    </ContentSub2>
-                </Content2>
-                <Content3>
-                    <div className="label">
-                        <Text text="Aquí tendras la posibilidad de cargar y descargar un archivos .xml, para que puedas agrgar una lista de invitados a tu gusto." propsTextSub/>
-                    </div>
-                    <div className="content-button">
-                        <Input type="file" accept=".xml"  propsFile/>
-                        {/* <Button funcion="" name={"Subir archivo"} propsButton/> */}
-                        <Button funcion="" name={"Descargar archivo"} propsButton/>
-                    </div>
-                </Content3>
-                <Content4>
-                    <div className="label">
-                        <Label msn="Lugar del evento"/>
-                    </div>
-                    <Input type="text" propsText/>
-                </Content4>
+                        <div className="content-button">
+                            <InputText type="file" accept=".xml"  propsFile/>
+                            {/* <Button funcion="" name={"Subir archivo"} propsButton/> */}
+                            <Button funcion="" name={"Descargar archivo"} propsButton/>
+                        </div>
+                    </Content3>
+                    <Content4>
+                        <div className="label">
+                            <Label msn="Lugar del evento"/>
+                        </div>
+                        <InputText type="text" propsText/>
+                    </Content4>
                 </ContentPrimario>
                 <ContentSecundario>
                     <Content5>
                     <div className="label">
                         <Label msn="Categoría"/>
                     </div>
-                    <Input type="text" name="name" propsText/>
+                    <InputText type="text" name="name" propsText/>
                     </Content5>
                     <Content6>
                         <ContentSub3>
                             <div className="label">
                                 <Label msn="Fecha"/>
                             </div>
-                            <Input type="date" name="name" propsDate/>
+                            <InputText type="date" name="name" propsDate/>
                         </ContentSub3>
                         <ContentSub4>
                             <div className="label">
                                 <Label msn="Hora"/>
                             </div>
-                            <Input type="time" name="name" propsTime/>
+                            <InputText type="time" name="name" propsTime/>
                         </ContentSub4>
                     </Content6>
                     <Content7>
-                        <Text text="No podras seleccionar los tipos de  boletos en publico. Los boletos en eventos publicos seran gratuitos." propsTextSub/>
+                        <Contentsub5>
+                            <div className="label">
+                                <Label msn="Costo de evento privado"/>
+                            </div>
+                            <InputText type="text" propsTextcort/>
+                        </Contentsub5>
+                        <Contentsub6>
+                            <div className="label">
+                                <Label msn="Seleccione el tipo de boletos"/>
+                            </div>
+                            {/* <Input type="text" propsText/> */}
+                            <Button type="button" funcion="" name={"Configurar boletos"} propsButton onClick={() => changeStateModel1(!stateModel1) }/>
+                        </Contentsub6>
                     </Content7>
                     <Content8>
                         <Button funcion="" name={"Cancelar"} propsButton/>
@@ -93,12 +107,15 @@ function ConfigEventPublic() {
                     </Content8>
                 </ContentSecundario>
             </ContentForm>
-
+            <ModalBolets 
+                estado = {stateModel1}
+                cambiarEstado = {changeStateModel1}/> 
         </ContentGlobal>
     );
 }
 
-export default ConfigEventPublic;
+
+export default ConfigEventPrivate;
 
 const ContentGlobal = styled.div`
     width: 100%;
@@ -231,6 +248,24 @@ const Content7 = styled.div`
     justify-content: center;
     align-items: center;
     
+`;
+
+const Contentsub5 = styled.div`
+    width: 50%;
+    text-align: center;
+    height: 17.5vh;
+    .label{
+        margin: 3% 3% 9% 3%;
+    }
+`;
+
+const Contentsub6 = styled.div`
+    width: 50%;
+    text-align: center;
+    height: 17.5vh;
+    .label{
+        margin: 3% 3% 6% 3%;
+    }
 `;
 
 const Content8 = styled.div`

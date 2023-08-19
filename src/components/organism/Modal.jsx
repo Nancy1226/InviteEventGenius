@@ -97,50 +97,50 @@ const Content = styled.div`
 function Modal({estado, cambiarEstado ,funcion}) {
   return (
     <>
-    {estado && 
-    <Overlay>
-      <ContainerModal>
+      {estado && 
+      <Overlay>
+        <ContainerModal>
 
-        <EncabezadoModal>
-        </EncabezadoModal>
+          <EncabezadoModal>
+          </EncabezadoModal>
 
-        <BotonExit type='button' onClick={()=> {cambiarEstado(false) }} ><Image src={images.exit}/></BotonExit>
-    
-        <Content>
-          <h3>¿Has olvidado la contraseña?</h3>
-
-        <form>
-
-        <Input 
-              type={"email"}
-              placeholder={"Correo Electronico"}
-              id={"username"}
-              name={"username"}
-        /> 
-      <Button funcion={funcion} name={"Buscar"} /> 
-
-      <Input
-              type={"password"}
-              placeholder={"Contraseña nueva"}
-              id={"username"}
-              name={"username"}
-        />
-
-        <Input 
-              type={"password"}
-              placeholder={"Confirme la contraseña"}
-              id={"username"}
-              name={"username"}
-              />
-
-          <Button funcion={funcion} name={"Restablecer la contraseña"} estilo={false}/> 
-          </form>
+          <BotonExit type='button' onClick={()=> {cambiarEstado(false) }} ><Image src={images.exit}/></BotonExit>
       
-        </Content>
-              
-      </ContainerModal>
-    </Overlay>
-    }
+          <Content>
+            <h3>¿Has olvidado la contraseña?</h3>
+
+          <form>
+
+          <Input 
+                type={"email"}
+                placeholder={"Correo Electronico"}
+                id={"username"}
+                name={"username"}
+          /> 
+        <Button funcion={funcion} name={"Buscar"} /> 
+
+        <Input
+                type={"password"}
+                placeholder={"Contraseña nueva"}
+                id={"username"}
+                name={"username"}
+          />
+
+          <Input 
+                type={"password"}
+                placeholder={"Confirme la contraseña"}
+                id={"username"}
+                name={"username"}
+                />
+
+            <Button funcion={funcion} name={"Restablecer la contraseña"} estilo={false}/> 
+            </form>
+        
+          </Content>
+                
+        </ContainerModal>
+      </Overlay>
+      }
     </>
   );
 }
