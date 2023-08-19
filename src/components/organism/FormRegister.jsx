@@ -9,6 +9,8 @@ import Image from "../atoms/Image";
 import Button from "../atoms/Button";
 import ContentText from "../molecules/ContentText";
 import TextureLine from '../molecules/TextureLine';
+import Swal from 'sweetalert2';
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 function FormRegister() {
@@ -53,12 +55,33 @@ function FormRegister() {
           // Maneja la respuesta de la API según tus necesidades
             console.log('Respuesta de la API:', response.data);
             if (response.status == 200) {
-                alert("Usuario Creado exitosamente")
                 //pendiente : redireccionar usuario o limpiar campos del formulario
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Usuario creado exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                Navigate('/');
+            } else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Usuario no creado exitosamente o el correo ya existe',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         } catch (error) {
           // Maneja los errores
-            console.error('Error al enviar el formulario:', error);
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Usuario no creado exitosamente o el correo ya existe',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
     };
 
@@ -72,7 +95,7 @@ function FormRegister() {
                 <Input pattern={"[A-Za-z][A-Za-z0-9_]{7,29}"} type={"text"} placeholder={"Nombre de usuario"} dato={formData.nameuser} valor={handleInputChange} name="nameuser" required/>
                 <Input type={"email"} placeholder={"Correo electronico"} dato={formData.email} valor={handleInputChange} name="email" required/>
                 <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password" required/>
-                <Input type={"file"} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/>
+                {/* <Input type={"file"} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/> */}
                 
                 <Button type={"submit"}  name={"Registro"} />
                 <WrapperLink>

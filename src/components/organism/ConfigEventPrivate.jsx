@@ -8,7 +8,7 @@ import ModalBolets from "./ModalBolets";
 import { useState } from "react";
 
 function ConfigEventPrivate() {
-    const [stateModel1, changeStateModel1] = useState(true);
+    const [stateModel1, changeStateModel1] = useState(false);
     return (  
         <ContentGlobal>
             <TittleG msn={"Configuracion de evento"}/>
@@ -99,6 +99,7 @@ function ConfigEventPrivate() {
                             </div>
                             {/* <Input type="text" propsText/> */}
                             <Button type="button" funcion="" name={"Configurar boletos"} propsButton onClick={() => changeStateModel1(!stateModel1) }/>
+                            
                         </Contentsub6>
                     </Content7>
                     <Content8>
