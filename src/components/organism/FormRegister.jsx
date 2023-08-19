@@ -52,6 +52,10 @@ function FormRegister() {
     
           // Maneja la respuesta de la API según tus necesidades
             console.log('Respuesta de la API:', response.data);
+            if (response.status == 200) {
+                alert("Usuario Creado exitosamente")
+                //pendiente : redireccionar usuario o limpiar campos del formulario
+            }
         } catch (error) {
           // Maneja los errores
             console.error('Error al enviar el formulario:', error);
@@ -65,10 +69,11 @@ function FormRegister() {
                 <form onSubmit={handleSubmit}>
                 <Title msn={"Registro"} />
 
-                <Input type={"text"} placeholder={"Nombre de usuario"} dato={formData.nameuser} valor={handleInputChange} name="nameuser"/>
-                <Input type={"text"} placeholder={"Correo electronico"} dato={formData.email} valor={handleInputChange} name="email"/>
-                <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password"/>
-
+                <Input pattern={"[A-Za-z][A-Za-z0-9_]{7,29}"} type={"text"} placeholder={"Nombre de usuario"} dato={formData.nameuser} valor={handleInputChange} name="nameuser" required/>
+                <Input type={"email"} placeholder={"Correo electronico"} dato={formData.email} valor={handleInputChange} name="email" required/>
+                <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password" required/>
+                <Input type={"file"} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/>
+                
                 <Button type={"submit"}  name={"Registro"} />
                 <WrapperLink>
                     <ContentText text="Ya tienes una cuenta?" propsText />
