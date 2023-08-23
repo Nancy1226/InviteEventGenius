@@ -30,15 +30,28 @@ const StyledButton = styled.button`
     padding: ${props => props.estilo ? '3% 3%' : '2.5% 3%'};
     width: 65%;
     font-size: 2rem;
+    ${props => props.$propsButton &&`
+        width: 70%;
+        height: 6vh;
+        color: #000;
+        text-align: center;
+        font-family: 'Inter';
+        font-size: 1.3rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    `}
+    ${props => props.$buttonUpdate &&`
+        margin: 22% 0 0 0;
+    `}
   }
-
 `;
 
-function Button({  name, estilo }) {
+function Button({  name, estilo, propsButton, onClick, buttonUpdate}) {
   return (
     <>
       <StyledContainer>
-        <StyledButton type={"submit"}  estilo={estilo}>
+        <StyledButton type={"submit"}  estilo={estilo} $propsButton={propsButton} onClick={onClick} $buttonUpdate={buttonUpdate}>
           {name}
         </StyledButton>
       </StyledContainer>
