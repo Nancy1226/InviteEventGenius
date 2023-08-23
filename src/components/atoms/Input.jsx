@@ -48,7 +48,7 @@ const StyledInput = styled.input`
 
 `;
 
-function Input({ type, placeholder, name, id, dato, valor, pattern, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime }) {
+function Input({ type, placeholder, name, id, dato, valor, pattern }) {
   return (
     <>
       <StyledContainerInput>

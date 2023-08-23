@@ -32,17 +32,13 @@ const StyledButton = styled.button`
     font-size: 2rem;
   }
 
-  ${props => props.$propsButton &&`
-        width: 40%;
-        height: 8vh;
-  `}
 `;
 
-function Button({  name, estilo, propsButton }) {
+function Button({  name, estilo }) {
   return (
     <>
       <StyledContainer>
-        <StyledButton type={"submit"}  estilo={estilo} $propsButton={propsButton}>
+        <StyledButton type={"submit"}  estilo={estilo}>
           {name}
         </StyledButton>
       </StyledContainer>

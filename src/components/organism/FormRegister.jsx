@@ -11,6 +11,8 @@ import ContentText from "../molecules/ContentText";
 import TextureLine from '../molecules/TextureLine';
 import Swal from 'sweetalert2';
 import { Navigate, useNavigate } from "react-router-dom";
+import { Formik } from 'formik';
+import WrapperLink from '../molecules/WrapperLink';
 
 
 function FormRegister() {
@@ -29,13 +31,6 @@ function FormRegister() {
             [name] : value,
         }));
     };
-
-    // const handleImageChange = (event) => {
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         image: event.target.files[0],
-    //     }));
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -89,6 +84,7 @@ function FormRegister() {
     return (  
         <StyledContainer $propsContainer >
             <StyledContainerForm >
+                <Formik>
                 <form onSubmit={handleSubmit}>
                 <Title msn={"Registro"} />
 
@@ -98,15 +94,15 @@ function FormRegister() {
                 {/* <Input type={"file"} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/> */}
                 
                 <Button type={"submit"}  name={"Registro"} />
-                <WrapperLink>
-                    <ContentText text="Ya tienes una cuenta?" propsText />
-                    <ContentLink to="/" link="Inicia Sesión"/>
-                </WrapperLink>
+                <Content>
+                    <WrapperLink txt="Ya tienes una cuenta?" to="/" link="Inicia Sesión" txtlogin/>
+                </Content>
                 <DivisionText>
-                    <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsText />
+                    <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsPagina propsTextPagina />
                 </DivisionText>
                 <TextureLine  propsTextLine1 propsTextLine2 propsTextLine3/>
                 </form>
+                </Formik>
             </StyledContainerForm>
                 
 
@@ -119,12 +115,17 @@ function FormRegister() {
 
 export default FormRegister;
 
-const WrapperLink = styled.div`
+const Content = styled.div`
     display: flex;
     gap: 1vh;
     justify-content: center;
     align-items: center;
     margin-top: 3%;
+    width: 50%;
+    margin-left: 10%;
+    @media (min-width: 1024px) {
+    display: flex;
+    }
 `;
 
 const DivisionText = styled.div`
@@ -133,6 +134,7 @@ const DivisionText = styled.div`
     align-items: center;
     margin-top: 3%;
     font-size: 1.5rem;
+    width: 100%;
 `;
 
 const StyledContainer = styled.div` //contenedor principal

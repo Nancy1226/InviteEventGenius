@@ -14,6 +14,7 @@ import Button from "../atoms/Button";
 import ContentLink from "../molecules/ContentLink";
 import ContentText from "../molecules/ContentText";
 import TextureLine from '../molecules/TextureLine';
+import WrapperLink from '../molecules/WrapperLink';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -60,12 +61,14 @@ const StyledContainerForm = styled.div`
   }
 `;
 
-const WrapperLink = styled.div`
-  display: flex;
-  gap: 1vh;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3%;
+const Content = styled.div`
+    display: flex;
+    gap: 1vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    width: 70%;
+    margin-left: 15%;
   @media (min-width: 1024px) {
     display: flex;
   }
@@ -73,11 +76,11 @@ const WrapperLink = styled.div`
 
 
 const DivisionText = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3%;
-  font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+    width: 100%;
 `;
 
 const StyledContainerImg = styled.div`
@@ -193,17 +196,11 @@ function FormLogin() {
                 </StyledButton>
 
                 <Button disabled={isSubmitting} name={"Iniciar Sesion"} estilo={true}/>
-                <WrapperLink>
-                  <ContentText text={"¿Aun no  tienes una cuenta?"} propsText />
-                  <ContentLink to="/register" link={"Que esperas, crea una ahora!"} />
-                </WrapperLink>
+                <Content>
+                    <WrapperLink txt="¿Aun no tienes unacuenta? " to="/register" link="Que esperas, crea una ahora!" txtRegister propsLogin/>
+                </Content>
                 <DivisionText>
-                  <ContentText
-                    text={
-                      "Unete a esta nueva experiencia y haz realidad tus pensamientos"
-                    }
-                    propsText
-                  />
+                    <ContentText text="Unete a esta nueva experiencia y haz realidad tus pensamientos" propsPagina propsTextPagina2 />
                 </DivisionText>
                 <TextureLine />
               </form>

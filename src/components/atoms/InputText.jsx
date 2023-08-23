@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function InputText({ type, placeholder, name, id, dato, valor, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio }) {
+function InputText({ type, placeholder, name, id, value, className, onClick, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio }) {
     return (  
         <>
             <StyledContainerInput>
@@ -9,8 +9,9 @@ function InputText({ type, placeholder, name, id, dato, valor, propsInput, props
                 placeholder={placeholder}
                 name={name}
                 id={id}
-                value={dato}
-                onChange={valor}
+                value={value}
+                className={className}
+                onClick={onClick}
                 $propsInput={propsInput}
                 $propsInputRadio={propsInputRadio}
                 $propsText={propsText}
@@ -90,6 +91,8 @@ const StyledInput = styled.input`
 
         ${props => props.$propsFile &&`
             width: 70%;
+            border: none;
+            background-color: #5138EE;
         `}
 
         ${props => props.$propsDate &&`
@@ -109,7 +112,9 @@ const StyledInput = styled.input`
         `}
 
         ${props => props.$propsInputRadio &&`
+            background-color: darkgreen;
             width: 100%;
+            border: 0.3vh solid black;
         `}
     }
 `;
