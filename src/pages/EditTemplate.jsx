@@ -1,10 +1,13 @@
 import BodyEditTemplate from "../components/organism/BodyEditTemplate";
+import Navbar from "../components/organism/Navbar";
+
 
 function EditTemplate() {
     return ( 
     <>
-        <h1>Hola soy la page</h1>
+        <Navbar />
         <BodyEditTemplate />
+        
     </>
      );
 }
