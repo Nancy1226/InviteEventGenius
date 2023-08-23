@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { images } from "../../images/images";
 import Title from "../atoms/Title";
+import React, { useState, useEffect } from 'react';
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
-
+import axios from "axios";
 
 const StyledContainer = styled.div`
     background:#FCD8FF;
@@ -76,6 +77,15 @@ const StyledContainerImg = styled.div`
     height: 60%;
     img{
         width: 100%;
+    }
+    button{
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: none;
+        &:hover{
+            cursor: pointer;
+        }
     }
 
 `;
@@ -161,6 +171,18 @@ const StyledContainerButton = styled.div`
 `;
 
 function BodyProfile() {
+    const [data, setData] = useState(null);
+
+  useEffect(() => {
+
+    axios.get('http://localhost:3002/UserUpdatePhoto/:userId').then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+      });
+  }, []); 
+
     return ( 
     <>
         <StyledContainer>
@@ -178,13 +200,20 @@ function BodyProfile() {
                     </StyledContainerH2>
 
                     <StyledContainerImg>
-                    <Image src={images.photo} />
+                    <button type="button" onClick={''}>
+                    {data ? (
+                        <Image src={data.image} />
+                        ) : (
+                            <p>Cargando...</p>
+                          )}
+                    </button>
+
                     </StyledContainerImg>
+                    
                     </StyledContainerProfile>
 
                     <StyledContainerButtons>
                     <Button name={"Cambiar imagen"} estilo={true} />
-                    <Button name={"Subir imagen"} estilo={true} />
                     <Button name={"Borrar imagen"} estilo={true} />
                     </StyledContainerButtons>
 
