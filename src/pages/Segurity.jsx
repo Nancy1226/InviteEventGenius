@@ -2,7 +2,7 @@ import Navbar from "../components/organism/Navbar";
 import NavbarVertical from "../components/organism/NavbarVertical";
 import BodySecurity from "../components/organism/BodySecurity";
 
-function Security() {
+function Segurity() {
     return ( 
     <>
         <Navbar />
@@ -12,4 +12,4 @@ function Security() {
      );
 }
 
-export default Security;
+export default Segurity;

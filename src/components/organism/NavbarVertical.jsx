@@ -8,43 +8,32 @@ import "../styles/NavbarVertical.css"
 function NavbarVertical({src}) {
     return ( 
     <>
-    <div className="container-main">{/* padre */}
-
-        <div className="subcontainer">
-
-            <div className="subcontainer-img">
-            
-            <Image src={images.photo} />
+        <div className="container-main">{/* padre */}
+            <div className="subcontainer">
+                <div className="subcontainer-img">
+                    <Image src={images.photo} imgConf/>
+                </div>
+            <div className="subcontainer-options-nav">
+                <ul className="subcontainer-options">
+                    <OptionsNav to={"/profile"} src={images.profilep} msn={"Tu cuenta"} />
+                </ul>
+                <ul className="subcontainer-options">
+                    <OptionsNav to={"/security"} src={images.security} msn={"Seguridad"} />
+                </ul>
             </div>
-
-        <div className="subcontainer-options-nav">
-
-            <ul className="subcontainer-options">
-                <OptionsNav to={"/profile"} src={images.profilep} msn={"Tu cuenta"} />
-            </ul>
-
-            <ul className="subcontainer-options">
-                <OptionsNav to={"/security"} src={images.security} msn={"Seguridad"} />
-            </ul>
+                <div className="subcontainer-options-nav-dos">
+                    <ul className="subcontainer-options">
+                        <OptionsNav to={"/"} src={images.pay} msn={"Metodos de pago"} />
+                    </ul>
+                    <ul className="subcontainer-options">
+                        <OptionsNav to={"/"} src={images.cart} msn={"Historial de compras"} />
+                    </ul>
+                </div>
+            </div>
+            <div className="subcontainer-button">
+                <Button name={"Cerrar Sesión"} estilo={true} />
+            </div>
         </div>
-
-    <div className="subcontainer-options-nav-dos">
-        <ul className="subcontainer-options">
-            <OptionsNav to={"/"} src={images.pay} msn={"Metodos de pago"} />
-        </ul>
-
-        <ul className="subcontainer-options">
-            <OptionsNav to={"/"} src={images.cart} msn={"Historial de compras"} />
-        </ul>
-    </div>
-
-        </div>
-
-        <div className="subcontainer-button">
-            <Button name={"Cerrar Sesión"} estilo={true} />
-        </div>
-
-    </div>
     </> 
     );
 }
