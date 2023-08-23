@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/segurity" element={<Segurity/>}/>
+          <Route path="/security" element={<Segurity/>}/>
           <Route path="/eventp" element={<EventPublic/>} />
           <Route path="/eventpr" element={<EventPrivate/>} />
           <Route path="/EditTemplate" element={<EditTemplate/>} />
