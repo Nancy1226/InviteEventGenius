@@ -3,10 +3,12 @@ import { Provider } from 'react-redux'
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
-import Security from "../pages/Security";
 import EditTemplate from "../pages/EditTemplate";
-import Event from "../pages/Event";
+import EventPublic from "../pages/EventPublic";
 import Store from "../redux/Store/store";
+import EventPrivate from "../pages/EventPrivate";
+import Segurity from "../pages/Segurity";
+
 
 function App() {
 
@@ -15,12 +17,13 @@ function App() {
       <BrowserRouter>
       <Provider store={Store}>
         <Routes>
-          <Route path="/" element={<Login></Login>} > </Route>
-          <Route path="/register" element={<Register></Register>} > </Route>
-          <Route path="/profile" element={<Profile></Profile>} > </Route>
-          <Route path="/security" element={<Security></Security>} > </Route>
-          <Route path="/EditTemplate" element={<EditTemplate></EditTemplate>}></Route>
-          <Route path="/event" element={<Event/>} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/segurity" element={<Segurity/>}/>
+          <Route path="/eventp" element={<EventPublic/>} />
+          <Route path="/eventpr" element={<EventPrivate/>} />
+          <Route path="/EditTemplate" element={<EditTemplate/>} />
         </Routes>
         </Provider>
       </BrowserRouter>

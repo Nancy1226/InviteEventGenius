@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Label({msn}) {
+function Label({msn, identifie}) {
     return (  
         <LabelG>{msn}</LabelG>
     );
