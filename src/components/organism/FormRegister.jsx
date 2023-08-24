@@ -93,9 +93,9 @@ function FormRegister() {
                 <Input type={"password"} placeholder={"Contraseña"} dato={formData.password} valor={handleInputChange}  name="password" required/>
                 {/* <Input type={"file"} accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" placeholder={"Agregar imagen de perfil"}  valor={handleImageChange} name="image"/> */}
                 
-                <Button type={"submit"}  name={"Registro"} />
+                <Button type={"submit"}  name={"Registro"}  to='/'/>
                 <Content>
-                    <WrapperLink txt="Ya tienes una cuenta?" to="/" link="Inicia Sesión" txtlogin/>
+                    <WrapperLink txt="Ya tienes una cuenta?" to='/' link="Inicia Sesión" txtlogin/>
                 </Content>
                 <DivisionText>
                     <ContentText text="Ya tienes una cuenta? Ahora crea y comparte tus diseños e invitaciones a todo el mundo." propsPagina propsTextPagina />

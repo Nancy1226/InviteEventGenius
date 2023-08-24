@@ -63,7 +63,7 @@ function ConfigEventPublic() {
                                 </div>
                         </div>
                         <div className="button2">
-                            <ButtonG name={"Descargar archivo"} propsButton3/>
+                        <ButtonG name={"Descargar archivo"} propsButton3 />
                         </div>
                     </div>
                 </Content3>

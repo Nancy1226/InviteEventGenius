@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 function ButtonG({name, onClick, propsButton, propsButton2, propsButton3, propsButton4 }) {
     return (  
-        <StyledButton type="button" onClick={onClick} $propsButton={propsButton} $propsButton2={propsButton2} $propsButton3={propsButton3} $propsButton4={propsButton4}>
+        <StyledButton type="button" onClick={onClick} $propsButton={propsButton} $propsButton2={propsButton2} $propsButton3={propsButton3} $propsButton4={propsButton4} >
             {name}
         </StyledButton>
     );
