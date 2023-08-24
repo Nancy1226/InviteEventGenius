@@ -4,7 +4,6 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import EventPublic from "../pages/EventPublic";
 import EventPrivate from "../pages/EventPrivate";
-import InvitationPublic from "../components/organism/InvitationPublic";
 
 function App() {
 
@@ -17,7 +16,6 @@ function App() {
           <Route path="/profile" element={<Profile></Profile>} > </Route>
           <Route path="/eventp" element={<EventPublic/>} />
           <Route path="/eventpr" element={<EventPrivate/>} />
-          <Route path="/ip" element={<InvitationPublic/>} />
         </Routes>
       </BrowserRouter>
     </>
