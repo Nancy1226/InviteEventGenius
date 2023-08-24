@@ -16,9 +16,10 @@ const LabelG = styled.label`
         width: 65%;
         font-size: 2rem;
         ${props => props.$propsLabel &&`
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             font-family: Inter;
-            font-weight: bold; 
+            font-weight: bold;
+            color: #ffff;
         `}
     }
 `;

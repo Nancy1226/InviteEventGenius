@@ -5,6 +5,7 @@ import Label from "../atoms/Label";
 import ButtonG from "../atoms/ButtonG";
 import Text from "../atoms/Text";
 import InputText from "../atoms/InputText";
+import ButtonDowland from "../atoms/ButtonDownland";
 
 function ConfigEventPublic() {
 
@@ -63,7 +64,7 @@ function ConfigEventPublic() {
                                 </div>
                         </div>
                         <div className="button2">
-                            <ButtonG name={"Descargar archivo"} propsButton3/>
+                            <ButtonDowland />
                         </div>
                     </div>
                 </Content3>
