@@ -13,7 +13,7 @@ export default ButtonDowland;
 
 const ButtonD = styled.div`
     color: black;
-    background: #5138EE;
+    background: #37289c;
     border-radius: 20px;
     text-align: center;
     font-family: Inter;
