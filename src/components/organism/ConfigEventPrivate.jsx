@@ -6,23 +6,33 @@ import ButtonG from "../atoms/ButtonG";
 import Text from "../atoms/Text";
 import ModalBolets from "./ModalBolets";
 import { useState } from "react";
+import ButtonDowland from "../atoms/ButtonDownland";
 
 function ConfigEventPrivate() {
     const [stateModel1, cambiarEstadoModel1] = useState(false);
     
     const [formData, setFormData] = useState({
+        nameEvent: '',
         nump1: 10,
         nump2: 30,
-        archive: null
+        nump3: 50,
+        numParticipants: '',
+        archive: null,
+        adress: '',
+        category: '',
+        date: '',
+        time: '',
+        price: 300
+        
     });
     
-    // const handleInputChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         [name]: value,
-    //     }));
-    // };
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
     
     const handleArchiveChange = (event) => {
         setFormData((prevData) => ({
@@ -64,7 +74,7 @@ function ConfigEventPrivate() {
                         <div className="label">
                             <Label msn="Nombre del evento"/>
                         </div>
-                        <InputText type="text" propsText name="name"  />
+                        <InputText type="text" propsText name="name" value={formData.nameEvent} onChange={handleInputChange} />
                     </Content1>
                     <Content2>
                         <ContentSub1>
@@ -73,15 +83,15 @@ function ConfigEventPrivate() {
                             </div>
                             <div className="content-option">
                                 <div className="option">
-                                    <InputText type="radio" propsInputRadio name="name" />
+                                    <InputText type="radio" propsInputRadio name="name" value={formData.nump1} onChange={handleInputChange}/>
                                     <Label msn="10"/>
                                 </div>
                                 <div className="option">
-                                    <InputText type="radio" propsInputRadio name="name" />
+                                    <InputText type="radio" propsInputRadio name="name" value={formData.nump2} onChange={handleInputChange}/>
                                     <Label msn="20"/>
                                 </div>
                                 <div className="option">
-                                    <InputText type="radio" propsInputRadio name="name" />
+                                    <InputText type="radio" propsInputRadio name="name" value={formData.nump3} onChange={handleInputChange}/>
                                     <Label msn="30"/>
                                 </div>
                             </div>
@@ -90,7 +100,7 @@ function ConfigEventPrivate() {
                             <div className="label">
                                 <Label msn="Ingrese otra cantidad"/>
                             </div>
-                            <InputText type="number" propsCantNumber />
+                            <InputText type="number" propsCantNumber value={formData.numParticipants} onChange={handleInputChange}/>
                         </ContentSub2>
                     </Content2>
                     <Content3>
@@ -109,7 +119,8 @@ function ConfigEventPrivate() {
                                 </div>
                             </div>
                             <div className="button2">
-                                <ButtonG name={"Descargar archivo"} propsButton3 />
+                                {/* <ButtonG name={"Descargar archivo"} propsButton3 /> */}
+                                <ButtonDowland />
                                 
                             </div>
                         </div>
@@ -118,7 +129,7 @@ function ConfigEventPrivate() {
                         <div className="label">
                             <Label msn="Lugar del evento"/>
                         </div>
-                        <InputText type="text" propsText />
+                        <InputText type="text" propsText value={formData.adress} onChange={handleInputChange}/>
                     </Content4>
                 </ContentPrimario>
                 <ContentSecundario>
