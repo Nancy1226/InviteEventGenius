@@ -1,8 +1,9 @@
 import { Formik, Form, Field, ErrorMessage} from 'formik';
 import { useState } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import styled from "styled-components";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { images } from "../../images/images";
@@ -107,6 +108,9 @@ function FormLogin() {
   const navigate = useNavigate();
   const [apiData, setApiData] = useState(null);
 
+  const dispatch = useDispatch();
+
+
   return (
     <>
       <StyledContainer>
@@ -146,8 +150,8 @@ function FormLogin() {
                   
                   Swal.fire({
                     icon: 'error',
-                    title: 'Usuario no encontrado',
-                    text: 'Correo o contraseña invalidos',
+                    title: 'Correo o contraseña invalidos',
+                    text: '',
                     footer: ''
                   })
                 }

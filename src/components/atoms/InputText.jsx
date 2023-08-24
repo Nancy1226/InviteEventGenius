@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-function InputText({ type, placeholder, name, id, value, className, onClick, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio }) {
+
+function InputText({ inputUpdateName, className, inputFile, type, placeholder, name, id, dato, valor, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio, onClick, value }) {
     return (  
         <>
             <StyledContainerInput>
                 <StyledInput
+                className={className}
                 type={type}
                 placeholder={placeholder}
                 name={name}
@@ -21,6 +23,8 @@ function InputText({ type, placeholder, name, id, value, className, onClick, pro
                 $propsDate={propsDate}
                 $propsTime={propsTime}
                 $propsTextcort={propsTextcort}
+                $inputFile={inputFile}
+                $inputUpdateName={inputUpdateName}
                 />
             </StyledContainerInput>
         </>
@@ -101,8 +105,8 @@ const StyledInput = styled.input`
             height: 7vh;
         `}
 
-        ${props => props.$propsTime &&`
-            width: 90%;
+        ${props => props.$propsTime &&` 
+            width: 90%;n  
             height: 7vh;
             border: 0.3vh solid black;
         `}
@@ -115,6 +119,15 @@ const StyledInput = styled.input`
             background-color: darkgreen;
             width: 100%;
             border: 0.3vh solid black;
+        `}
+
+        ${props =>props.$inputFile && `
+            display: none;
+        `}
+        ${props =>props.$inputUpdateName && `
+            color: black;
+            width: 100%;
+            height: 5vh;
         `}
     }
 `;

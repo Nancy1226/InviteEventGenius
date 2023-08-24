@@ -186,9 +186,28 @@ const StyledContainerButton1 = styled.div`
     height: 100%;
   }
 `;
+const ContainerUpdateEmail = styled.div`
+  width: 100%;
+  background-color: aqua;
+`;
 
 function BodySecurity() {
+
+    const [email, setEmail] = useState("Pedro Jose Portillo Gomez");
+
     const [stateModal1, changeStateModal1] = useState(false);
+
+    const [showInput, setShowInput] = useState(false);
+
+    const handlerEmailUpdate = () => {
+
+
+      try {
+        
+      } catch (error) {
+          alert("Lo sentimos, no se pudo cambiar el correo")
+      }
+    }
     return (
       <>
         <StyledContainer>
@@ -223,10 +242,15 @@ function BodySecurity() {
                 deberá ingresar su palabra clave.
               </p>
               <StyledContainerButton>
-                <p>Correo@correo.com</p>
-                <Button name={"Editar Correo"} />
+                { showInput &&
+                    <p>{email}</p>
+                }
+                <Button name={"Editar Correo"} onClick={handlerEmailUpdate}/>
               </StyledContainerButton>
             </StyledContainerTwo>
+            <ContainerUpdateEmail>
+
+            </ContainerUpdateEmail>
             <StyledContainerTree>
               <h2>Eliminacion</h2>
               <p>
