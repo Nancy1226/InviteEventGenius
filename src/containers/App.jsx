@@ -10,6 +10,8 @@ import Segurity from "../pages/Segurity";
 import NotFound from "../pages/NotFound";
 import UserContext from "../context/UserContext";
 import RouteProtected from "./RouterProtected";
+import InvitationPublic from "../components/organism/InvitationPublic";
+
 
 function App() {
   const [isLoged, setIsLoged] = useState(
@@ -40,6 +42,8 @@ function App() {
           </Route>
 
           <Route path="/*" element={<NotFound/>} />
+          <Route path="/ip" element={<InvitationPublic />} />
+
         </Routes>
         </UserContext.Provider>
       </BrowserRouter>
