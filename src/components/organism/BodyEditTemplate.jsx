@@ -209,7 +209,9 @@ function BodyEditTemplate() {
         downloadLink.click();
         const canvasData = editor.canvas.toJSON(); 
         const canvasDataJson = JSON.stringify(canvasData);
+        
         console.log(canvasDataJson);
+
     };
 
   return (
