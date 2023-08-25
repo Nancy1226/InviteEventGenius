@@ -1,8 +1,8 @@
 import { Formik, Form, Field, ErrorMessage} from 'formik';
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {useDispatch} from 'react-redux'
+import UserContext from '../../context/UserContext';
 import styled from "styled-components";
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -103,10 +103,8 @@ const StyledButton = styled.button`
 function FormLogin() {
   const [stateModal1, changeStateModal1] = useState(false);
   const navigate = useNavigate();
-  const [apiData, setApiData] = useState(null);
-
-  const dispatch = useDispatch();
-
+  const { setIsLoged } = useContext(UserContext);
+  const { setUserName } = useContext(UserContext);
 
   return (
     <>
@@ -126,44 +124,36 @@ function FormLogin() {
               }
               return errors;
             }}
+
             onSubmit={(values, { setSubmitting }) => {
+
               setTimeout( async () => {
-                try {
-                const response = await axios.get(`http://localhost:3002/usuario/${values.email}/${values.password}`, {
+              
+              const response = await axios.get(`http://localhost:3002/usuario/${values.email}/${values.password}`, {
                   params: { email: values.email, password: values.password }
                 });
-                setApiData(response.data);
 
-                if (apiData.email === values.email && apiData.password === values.password) {
-                  Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Usuario encontrado',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  navigate('/profile');
-                }else{
+                if (response.data.email === values.email && response.data.password === values.password) {
                   
                   Swal.fire({
-                    icon: 'error',
-                    title: 'Correo o contraseña invalidos',
-                    text: '',
-                    footer: ''
-                  })
-                }
-            
-              } catch (error) {
-        
+                    text: `Bienvenido`,
+                    icon: 'success',
+                  });
+                  await new Promise((resolve) => {
+                    window.localStorage.setItem( "loggedUser", JSON.stringify(response.data));
+                    resolve();
+                  });
+                  setIsLoged(true);
+                  setUserName(response.data.nameuser);
+                  navigate('/profile');
 
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Campos vacios',
-                  text: 'Porfavor, ingrese bien los datos',
-                  footer: ''
-                })
-                
-                }
+                } else {
+                  Swal.fire({
+                    title: 'Oops...',
+                    text: `Credenciales incorrectas. Inténtalo de nuevo.`,
+                    icon: 'error',
+                  });
+                }            
                 setSubmitting(false);
               }, 400);
 
