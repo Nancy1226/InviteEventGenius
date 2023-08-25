@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-function InputText({ inputUpdateName, className, inputFile, type, placeholder, name, id, dato, valor, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio, onClick, value }) {
+function InputText({ inputUpdateName, className, inputFile, type, placeholder, name, id, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio, onClick, value, onChange, checked }) {
     return (  
         <>
             <StyledContainerInput>
@@ -12,8 +12,8 @@ function InputText({ inputUpdateName, className, inputFile, type, placeholder, n
                 name={name}
                 id={id}
                 value={value}
-                className={className}
                 onClick={onClick}
+                onChange={onChange}
                 $propsInput={propsInput}
                 $propsInputRadio={propsInputRadio}
                 $propsText={propsText}
@@ -25,6 +25,7 @@ function InputText({ inputUpdateName, className, inputFile, type, placeholder, n
                 $propsTextcort={propsTextcort}
                 $inputFile={inputFile}
                 $inputUpdateName={inputUpdateName}
+                checked={checked}
                 />
             </StyledContainerInput>
         </>

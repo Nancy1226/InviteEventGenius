@@ -34,6 +34,7 @@ const ButtonD = styled.div`
         width: 65%;
         font-size: 1.5rem;
     }
+
 `;
 
 const Linka = styled.a`

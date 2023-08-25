@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-function Label({msn, identifie}) {
+function Label({msn, propsLabel}) {
     return (  
         <LabelG $propsLabel={propsLabel} >{msn}</LabelG>
     );
