@@ -41,17 +41,24 @@ const StyledButton = styled.button`
         font-weight: 400;
         line-height: normal;
     `}
+
     ${props => props.$buttonUpdate &&`
         margin: 22% 0 0 0;
+        width: 50%;
+    `}
+
+    ${props => props.$showButton &&`
+        font-size: 1.7rem;
+        width: 70%;
     `}
   }
 `;
 
-function Button({  name, estilo, propsButton, onClick, buttonUpdate}) {
+function Button({  name, estilo, propsButton, onClick, buttonUpdate, showButton}) {
   return (
     <>
       <StyledContainer>
-        <StyledButton type={"submit"}  estilo={estilo} $propsButton={propsButton} onClick={onClick} $buttonUpdate={buttonUpdate}>
+        <StyledButton type={"submit"}  estilo={estilo} $propsButton={propsButton} onClick={onClick} $showButton={showButton} $buttonUpdate={buttonUpdate}>
           {name}
         </StyledButton>
       </StyledContainer>

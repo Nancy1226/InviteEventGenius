@@ -9,10 +9,19 @@ const Textstyled = styled.p`
         padding: ${props => props.estilo ? '3% 3%' : '0 2%'};
         width: 100%;
         font-size: 2rem;
+        margin: 0 2%;
+    }
+    ${props => props.$textinvited &&`
+        color: black;
+        font-size: 2rem;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 100;
+    `}
 
-        ${props => props.$propsText &&`
-            color: black; 
-        `}
+    ${props => props.$propsText &&`
+                color: black; 
+     `}
 
         ${props => props.$propsTextSub &&`
             color: black;
@@ -45,11 +54,11 @@ const Textstyled = styled.p`
             font-size: 1.4rem;
             text-align: center;
         `}
-    }
+
 `;
 
 
-function Text({text, propsText, propsTextSub, txtlogin, propsTextPagina, propsTextPagina2, txtRegister}) {
+function Text({text, propsText, txtlogin, propsTextPagina, propsTextPagina2, txtRegister,  propsTextSub, textinvited}) {
     return ( 
         <Textstyled $propsText = {propsText} $propsTextSub={propsTextSub} $txtlogin={txtlogin} $propsTextPagina={propsTextPagina} $propsTextPagina2={propsTextPagina2} $txtregister={txtRegister} >{text} </Textstyled>
     );

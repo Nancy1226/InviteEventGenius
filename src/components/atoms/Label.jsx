@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 
-function Label({msn, identifie}) {
+function Label({msn, propsLabel, propsInvitation}) {
     return (  
-        <LabelG $propsLabel={propsLabel} >{msn}</LabelG>
+        <LabelG $propsLabel={propsLabel} $propsInvitation={propsInvitation}>{msn}</LabelG>
     );
 }
 
@@ -17,9 +17,16 @@ const LabelG = styled.label`
         width: 65%;
         font-size: 2rem;
         ${props => props.$propsLabel &&`
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             font-family: Inter;
-            font-weight: bold; 
+            font-weight: bold;
+            color: #ffff;
+        `}
+        ${props => props.$propsInvitation &&`
+            font-size: 2rem;
+            font-family: Inter;
+            color: black;
+            margin:  0 0 0 5%;
         `}
     }
 `;

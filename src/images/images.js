@@ -2,7 +2,9 @@ export const images = {
     //images
     child:"imgs/happyChild.svg",
     corean:"imgs/happyCorean.svg",
-
+    DefaultProfile:"imgs/notImgDefault.jpg",
+    templateOne:"imgs/DesignerTemplateOne.jpeg",
+  
     //icons
     line1:"imgs/line1.svg",
     line2:"imgs/line2.svg",
@@ -15,6 +17,7 @@ export const images = {
     security:"imgs/security.svg",
     pay:"imgs/pay.svg",
     cart:"imgs/cart.svg",
+    group:"imgs/group.svg",
     downloads:"imgs/downloads.svg",
     delete:"imgs/delete.svg",
     save:"imgs/save.svg",

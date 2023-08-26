@@ -1,19 +1,51 @@
 import { useState } from "react";
 import { images } from "../../images/images";
+import axios from "axios";
+import {useContext} from "react";
+import {useEffect} from "react";
+import UserContext from "../../context/UserContext";
 import styled from "styled-components";
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
 import InputText from "../atoms/InputText";
 import ButtonFile from "../atoms/ButtonFile";
-import axios from "axios";
 
-function BodyProfile() {
 
+function BodyProfile() {    
     const [selectedFile, setSelectedFile] = useState(null);
-    const [name, setName] = useState("Juanito");
+    const [name, setName] = useState("");
     const [showInput, setShowInput] = useState(false);
+    const {userName, setUserName} = useContext(UserContext);
+    const {setIsLoged} = useContext(UserContext);
+    const [dataApi, setDataApi] = useState({});
 
-    const handleFileChange = (e) => {
+    useEffect(() => {
+        // console.log("Obteniendo la imagen")
+        obtenerImagen(); 
+      },[]);
+
+    const obtenerImagen = async () => {
+        const response = await axios.get(`http://localhost:3002/photoUser/${userName}`)
+       
+        const base64Image = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+  
+          setDataApi(`data:image/jpeg;base64,${base64Image}`);
+
+        // setDataApi(response.data);
+        console.log("imprimiendo el estado "+dataApi);
+    }
+
+
+    const handleImageSelect = (e) => {
+        setSelectedImage(e.target.files[0]);
+    };
+  
+    const handleFileChange = async (e) => {
         // Obtener el archivo seleccionado
         const file = e.target.files[0];
         // Actualizar el estado con el archivo
@@ -22,41 +54,43 @@ function BodyProfile() {
         try {
             // Intentar crear la url con el valor de selectFile
             const URL = URL.createObjectURL(selectedFile);
+            // const response = await axios.put(`http://localhost:3002/UserUpdatePhoto/${userName}`)
+
             // Hacer algo con la url ...
         } catch (error) {
             // Mostrar el error o hacer otra cosa
             console.error("No se puede seleccionar el archivo");
         }          
       };
-
+  
     const handleUpload = async () => {
-        // Crear un objeto FormData con la imagen seleccionada
-        const formData = new FormData();
-        formData.append("image", selectedFile);
-    
-        // Enviar la imagen usando axios
-        try {
-          const response = await axios.post("", formData);
-          // Mostrar el resultado
-          alert("Imagen subida con éxito");
-        } catch (error) {
-          // Mostrar el error
-          alert("Error al subir la imagen");
+        if (selectedImage) {
+            const formData = new FormData();
+            formData.append("image", selectedImage);
+
+
+            try {
+                const response = await axios.post(`http://localhost:3002/UserUpdatePhoto/:uderId ${userId}`, formData);
+                console.log(response);
+                alert("Imagen subida con éxito");
+            } catch (error) {
+                console.error(error);
+                alert("Error al subir la imagen");
+            }
+        } else {
+            alert("Por favor, selecciona una imagen antes de subirla.");
         }
     };
 
     const handleDelete = async () => {
-        // Borrar la imagen del estado
-        setSelectedFile(null);
-    
-        // Borrar la imagen de la API usando axios
         try {
-          const response = await axios.delete("");
-          // Mostrar el resultado
-          alert("Imagen borrada con éxito");
+            const response = await axios.delete(`/UserDeletePhoto/${userId}`);
+            console.log(response);
+            setSelectedImage(null);
+            alert("Imagen borrada con éxito");
         } catch (error) {
-          // Mostrar el error
-          alert("Error al borrar la imagen");
+            console.error(error);
+            alert("Error al borrar la imagen");
         }
     };
 
@@ -68,7 +102,7 @@ function BodyProfile() {
     const handleUpdate = async () => {
         // Enviar el nombre usando axios
         try {
-          const response = await axios.put("", { name });
+          const response = await axios.put("http://localhost:3002/", { name });
           // Mostrar el resultado
           alert("Nombre actualizado con éxito");
           // Actualizar el estado con el nuevo nombre
@@ -80,8 +114,13 @@ function BodyProfile() {
         }
     };
 
-    const handleShowInput = () =>{
+    const handleShowInput =async () =>{
         setShowInput(true);
+
+    }
+
+    const handleCancel = async () =>{
+        setShowInput(false)
     }
 
     return ( 
@@ -104,13 +143,16 @@ function BodyProfile() {
                                     <Image src={URL} alt="Foto de perfil"/>
                                 )}
                                 {!selectedFile && (
-                                    <Image src={images.profile} alt="Foto de perfil"/>
+                                    <Image src={dataApi} alt="Foto de perfil" />
+                                    
+                                    // <image src={dataApi.photo}></image>
                                 )}
                             </div>
+
                         </StyledContainerImg>
                     </StyledContainerProfile>
                     <StyledContainerButtons>
-                        <ButtonFile accept="image/*" className="btn-file-img" msn="Cambiar imagen" onClick={handleFileChange} buttonfile />
+                        <ButtonFile accept="image/*" className="btn-file-img" msn="Cambiar imagen" id="imgProfile" onClick={handleImageSelect} buttonfile />
                         <Button name={"Subir imagen"} estilo={true} onClick={handleUpload} propsButton/>
                         <Button name={"Borrar imagen"} estilo={true} onClick={handleDelete} propsButton/>
                     </StyledContainerButtons>
@@ -119,7 +161,9 @@ function BodyProfile() {
                     <StyledContainerInfo>
                         <h1>Informacion</h1>
                         <h2>Nombre</h2>
-                        {!showInput && <p>{name}</p>}
+                        {/* {!showInput && <p>{name}</p>} */}
+                        {/* <p>{dataApi.nameuser}</p> */}
+                        <p>{}</p>
                     </StyledContainerInfo>
                     <StyledContainerButton>
                         <Button name={"Editar nombre"} estilo={true} onClick={handleShowInput} buttonUpdate/>
@@ -132,7 +176,8 @@ function BodyProfile() {
                                 <InputText type="text" dato={name} placeholder="Ingrese un nuevo nombre" valor={handlerUpdateName} inputUpdateName/>
                             </div>
                             <div className="content-button">
-                                <button type="button" onClick={handleUpdate} className="btn-update">Actualizar Nombre</button>
+                                <Button type="button" onClick={handleUpdate} name="Actualizar Nombre" showButton/>
+                                <Button type="button" onClick={handleCancel} name="Cancelar" showButton/>
                             </div>
                         </div>
                     )}
@@ -140,28 +185,30 @@ function BodyProfile() {
             </StyledSubContainer>
         </StyledContainer>
     </>
-);}
+    );
+}
 
-export default BodyProfile;
+
+export default (BodyProfile);
 
 const StyledContainer = styled.div`
     background:#FCD8FF;
     width: 80vw;
     height: 90vh;
-`;
+    `;
 
 const StyledContainerH1 = styled.div`
     display: flex;
+    width: 100%;
     /* margin-top: 5%; */
     h1{
+        margin: 2% 0 0 4%;
         /* position: absolute; */
         /* left: 0; */
-        margin-left:1.5%;
-        margin-top: 2%;
         color: #000;
         text-align: center;
         font-family: 'Inter';
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -175,25 +222,25 @@ const StyledSubContainer = styled.div`
     flex-direction: column;
     border: 30px solid #FCD8FF;
     height: 90%;
-`;
+    `;
 
 const StyledContainerOne  = styled.div`
     border-bottom: 2px solid black;
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 50%;
-`;
-
-
+    height: 50vh;
+    gap: 2vh;
+    `;
 
 const StyledContainerProfile = styled.div`
     display: flex;
     flex-direction: column;
     width: 20%;
     height: 100%;
-    margin: 0 0 0 7%;
-`;
+    margin: 0 0 0 6%;
+    gap: 2vh;
+    `;
 
 const StyledContainerButtons = styled.div`
     display: flex;
@@ -218,7 +265,7 @@ const StyledContainerButtons = styled.div`
         transition: 0.2s;
         overflow: hidden;
     }
-
+    
     .btn-file-img input[type = "file"]{
         cursor: pointer;
         position: absolute;
@@ -227,7 +274,7 @@ const StyledContainerButtons = styled.div`
         transform: scale(3);
         opacity: 0;
     }
-
+    
     .btn-file-img:hover{
         background-color: #73e8ff;
     }
@@ -235,14 +282,15 @@ const StyledContainerButtons = styled.div`
 
 const StyledContainerImg = styled.div`
     width: 100%;
-    height: 60%;
+    height: 30vh;
     img{
         width: 100%;
     }
-`;
+    `;
 
 const StyledContainerH2 = styled.div`
-    margin: 8%;
+    margin: 0 0 0 0;
+    width: 100%;
     h2{
         color: #000;
         text-align: center;
@@ -260,7 +308,7 @@ const StyledContainerTwo  = styled.div`
     width: 100%;
     height: 50%;
     padding-left: 5%;
-`;
+    `;
 
 const StyledContainerInfo = styled.div`
     /* border: 2px solid royalblue; */
@@ -300,7 +348,7 @@ const StyledContainerInfo = styled.div`
         line-height: normal;
         margin: 8%;
     }
-`;
+    `;
 
 const StyledContainerButton = styled.div`
     /* border: 2px solid rebeccapurple; */
@@ -316,7 +364,7 @@ const StyledContainerButton = styled.div`
         font-weight: 400;
         line-height: normal;
     }
-`;
+    `;
 
 const StyledContainerThree = styled.div`
     width: 100%;
@@ -339,15 +387,6 @@ const StyledContainerThree = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            .btn-update{
-                margin: 0 0 0 22%;
-                background-color: #73e8ff;
-                width: 50%;
-                height: 6vh;
-                border-radius: 20px;
-                border: 0;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-            }
         }
     }
 `;
