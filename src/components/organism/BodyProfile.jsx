@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { images } from "../../images/images";
+import {useContext} from "react";
+import {useEffect} from "react";
+import UserContext from "../../context/UserContext";
 import styled from "styled-components";
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
@@ -7,11 +10,22 @@ import InputText from "../atoms/InputText";
 import ButtonFile from "../atoms/ButtonFile";
 import axios from "axios";
 
-function BodyProfile() {
-
+function BodyProfile() {    
     const [selectedFile, setSelectedFile] = useState(null);
-    const [name, setName] = useState("Juanito");
     const [showInput, setShowInput] = useState(false);
+    const {userName, setUserName} = useContext(UserContext);
+    const {setIsLoged} = useContext(UserContext);
+    const [dataApi, setDataApi] = useState({});
+
+    useEffect(() => {
+        console.log("Obteniendo la tarjeta")
+        obtenerImagen(); 
+      }, []);
+
+    const obtenerImagen = async () => {
+        console.log("Logica para el axios");
+        // setDataApi(response.data);
+    }
 
     const handleFileChange = (e) => {
         // Obtener el archivo seleccionado
@@ -119,7 +133,8 @@ function BodyProfile() {
                     <StyledContainerInfo>
                         <h1>Informacion</h1>
                         <h2>Nombre</h2>
-                        {!showInput && <p>{name}</p>}
+                        {/* {!showInput && <p>{name}</p>} */}
+                        <p>{userName}</p>
                     </StyledContainerInfo>
                     <StyledContainerButton>
                         <Button name={"Editar nombre"} estilo={true} onClick={handleShowInput} buttonUpdate/>
@@ -140,9 +155,11 @@ function BodyProfile() {
             </StyledSubContainer>
         </StyledContainer>
     </>
-);}
+    );
+}
 
-export default BodyProfile;
+
+export default (BodyProfile);
 
 const StyledContainer = styled.div`
     background:#FCD8FF;
