@@ -8,6 +8,7 @@ import EventPublic from "../pages/EventPublic";
 import Store from "../redux/Store/store";
 import EventPrivate from "../pages/EventPrivate";
 import Segurity from "../pages/Segurity";
+import Home from "../pages/Home";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Provider store={Store}>
         <Routes>
           <Route path="/" element={<Login/>} />
+          <Route path="home" element={<Home/>}/>
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/security" element={<Segurity/>}/>
