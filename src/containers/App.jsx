@@ -7,12 +7,12 @@ import EditTemplate from "../pages/EditTemplate";
 import EventPublic from "../pages/EventPublic";
 import EventPrivate from "../pages/EventPrivate";
 import Segurity from "../pages/Segurity";
+import Invitation from "../pages/Invitattion";
 import InvitationPrivate from "../pages/InvitationPrivate";
 import InvitationPublic from "../pages/InvitationPublic";
 import NotFound from "../pages/NotFound";
 import UserContext from "../context/UserContext";
 import RouteProtected from "./RouterProtected";
-
 
 function App() {
   const [isLoged, setIsLoged] = useState(
@@ -39,6 +39,7 @@ function App() {
           <Route path="/security" element={<Segurity/>}/>
           <Route path="/eventp" element={<EventPublic/>} />
           <Route path="/eventpr" element={<EventPrivate/>} />
+          <Route path="/invited" element={<Invitation/>}/>
           <Route path="/EditTemplate" element={<EditTemplate/>} />
           <Route path="/invitationPri" element={<InvitationPrivate/>} />
           <Route path="/invitationPu" element={<InvitationPublic/>} />
