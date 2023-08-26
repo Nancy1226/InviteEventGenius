@@ -1,24 +1,85 @@
-import Input from "../atoms/Input";
 import styled from "styled-components";
 import TittleG from "../atoms/TittleG";
 import Label from "../atoms/Label";
 import ButtonG from "../atoms/ButtonG";
 import Text from "../atoms/Text";
 import InputText from "../atoms/InputText";
+import ButtonDowland from "../atoms/ButtonDownland";
+import ButtonFile from "../atoms/ButtonFile";
+import { useState } from "react";
 
 function ConfigEventPublic() {
+
+    const [formData, setFormData] = useState({
+        nameEvent: '',
+        numParticipants: '',
+        archive: null,
+        adress: '',
+        category: '',
+        date: '',
+        time: '',
+    });
+    
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        console.log(value);
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+    
+    const handleArchiveChange = (event) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            image: event.target.files[0],
+        }));
+    };
+    
+    const handleRadioChange = (event) => {
+        const { name, value } = event.target;
+        console.log(value);
+        setFormData((prevData) => ({
+            ...prevData,
+          numParticipants: value, // Actualiza la clave correspondiente con el valor seleccionado
+        }));
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+    
+        try {
+            const response = await axios.post('http://localhost:3002/registrarEvento', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            
+    
+          // Maneja la respuesta de la API según tus necesidades
+            console.log('Respuesta de la API:', response.data);
+        } catch (error) {
+          // Maneja los errores
+            console.log('Error al enviar el formulario:', error);
+        }
+    };
 
     return (  
         <ContentGlobal>
             <TittleG msn={"Configuracion de evento"}/>
 
-            <ContentForm>
+            <ContentForm onScroll={handleSubmit}>
                 <ContentPrimario>
                 <Content1>
                     <div className="label">
                         <Label msn="Nombre del evento"/>
                     </div>
-                    <InputText type="text" propsText name="name" />
+                    <InputText type="text" propsText name="nameEvent" value={formData.nameEvent} onChange={handleInputChange} />
                 </Content1>
                 <Content2>
                     <ContentSub1>
@@ -27,15 +88,15 @@ function ConfigEventPublic() {
                         </div>
                         <div className="content-option">
                             <div className="option">
-                                <InputText type="radio" propsInputRadio name="name"/>
+                                <InputText type="radio" propsInputRadio name="numParticipants" value="10" checked={formData.numParticipants === "10"} onChange={handleRadioChange} />
                                 <Label msn="10"/>
                             </div>
                             <div className="option">
-                                <InputText type="radio" propsInputRadio name="name"/>
+                                <InputText type="radio" propsInputRadio name="numParticipants" value="20" checked={formData.numParticipants === "20"} onChange={handleRadioChange}  />
                                 <Label msn="20"/>
                             </div>
                             <div className="option">
-                                <InputText type="radio" propsInputRadio name="name"/>
+                                <InputText type="radio" propsInputRadio name="numParticipants" value="30" checked={formData.numParticipants === "30"} onChange={handleRadioChange}  />
                                 <Label msn="30"/>
                             </div>
                         </div>
@@ -44,7 +105,7 @@ function ConfigEventPublic() {
                         <div className="label">
                             <Label msn="Ingrese otra cantidad"/>
                         </div>
-                        <InputText type="number" propsCantNumber/>
+                        <InputText type="number" propsCantNumber name="numParticipants"  onChange={handleInputChange} />
                     </ContentSub2>
                 </Content2>
                 <Content3>
@@ -53,17 +114,10 @@ function ConfigEventPublic() {
                     </div>
                     <div className="content-button">
                         <div className="button2">
-                            <div class="fileContainer">
-                                <div className="cofee">
-                                    <InputText type="file" propsFile/>
-                                </div>
-                                <div className="file">
-                                    <Label msn="Subir Archivo" propsLabel/>
-                                </div>
-                                </div>
+                            <ButtonFile msn={'Subir Archivo'} accept='.xlsx' value={formData.archive} onClick={handleArchiveChange} className="btn-file-excel" buttonDownland />
                         </div>
                         <div className="button2">
-                        <ButtonG name={"Descargar archivo"} propsButton3 />
+                            <ButtonDowland />
                         </div>
                     </div>
                 </Content3>
@@ -71,7 +125,7 @@ function ConfigEventPublic() {
                     <div className="label">
                         <Label msn="Lugar del evento"/>
                     </div>
-                    <InputText type="text" propsText/>
+                    <InputText type="text" propsText name="adress" value={formData.adress} onChange={handleInputChange}/>
                 </Content4>
                 </ContentPrimario>
                 <ContentSecundario>
@@ -79,20 +133,20 @@ function ConfigEventPublic() {
                     <div className="label">
                         <Label msn="Categoría"/>
                     </div>
-                    <InputText type="text" name="name" propsText/>
+                    <InputText type="text" name="category" propsText value={formData.category} onChange={handleInputChange}/>
                     </Content5>
                     <Content6>
                         <ContentSub3>
                             <div className="label">
                                 <Label msn="Fecha"/>
                             </div>
-                            <InputText type="date" name="name" propsDate/>
+                            <InputText type="date" name="date" propsDate value={formData.date} onChange={handleInputChange}/>
                         </ContentSub3>
                         <ContentSub4>
                             <div className="label">
                                 <Label msn="Hora"/>
                             </div>
-                            <InputText type="time" name="name" propsTime/>
+                            <InputText type="time" name="time" propsTime value={formData.time} onChange={handleInputChange}/>
                         </ContentSub4>
                     </Content6>
                     <Content7>
@@ -166,8 +220,8 @@ const ContentSub1 = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 16.6%;
-            height: 13vh;
+            width: 25%;
+            height: 8vh;
         }
     }
     .label{
@@ -198,50 +252,35 @@ const Content3 = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            .fileContainer {
-                overflow: hidden;
-                position: relative;
-                
-            }
-
-            .fileContainer [type=file] {
-                cursor: inherit;
+            .btn-file-excel{
                 display: flex;
-                font-size: 999px;
-                filter: alpha(opacity=0);
-                width: 100%;
-                height: 8vh;
-                border-radius: 20px;
-                opacity: 0;
-                position: absolute;
-                right: 0;
-                text-align: right;
-                top: 0;
-            }
-
-            .fileContainer {
-                border-radius: 20px;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
                 width: 70%;
-                height:0;
-                padding-bottom: 8vh;
-                border: 0.5vh solid #5138EE;
-                background: #5138EE;
-                .cofee {
-                    width: 0;
-                }
-                .file {
-                    /* background-color: #05dd22; */
-                    width: 100%;
-                    height: 8vh;
-                    display: flex;
-                    text-align: center;
-                    justify-content: center;
-                    align-items: center;
-                }
+                position: relative;
+                padding: 2% 4%;
+                height: 7vh;
+                line-height: 1.5;
+                border-radius: 20px;
+                background-color: #37289c;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                border: 0;
+                transition: 0.2s;
+                overflow: hidden;
             }
-
-            .fileContainer [type=file] {
+            
+            .btn-file-excel input[type = "file"]{
                 cursor: pointer;
+                position: absolute;
+                left: 0%;
+                top: 0%;
+                transform: scale(3);
+                opacity: 0;
+            }
+            
+            .btn-file-img:hover{
+                background-color: #37289c;
             }
         }
     }

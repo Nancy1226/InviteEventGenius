@@ -7,10 +7,11 @@ import EditTemplate from "../pages/EditTemplate";
 import EventPublic from "../pages/EventPublic";
 import EventPrivate from "../pages/EventPrivate";
 import Segurity from "../pages/Segurity";
+import InvitationPrivate from "../pages/InvitationPrivate";
+import InvitationPublic from "../pages/InvitationPublic";
 import NotFound from "../pages/NotFound";
 import UserContext from "../context/UserContext";
 import RouteProtected from "./RouterProtected";
-import InvitationPublic from "../components/organism/InvitationPublic";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
   );
   return (
     <>
-      <BrowserRouter>
+     <BrowserRouter>
       <UserContext.Provider value={{ isLoged, setIsLoged, userName, setUserName }}>
         <Routes>
           <Route path="/" element={<Login/>} />
@@ -39,10 +40,11 @@ function App() {
           <Route path="/eventp" element={<EventPublic/>} />
           <Route path="/eventpr" element={<EventPrivate/>} />
           <Route path="/EditTemplate" element={<EditTemplate/>} />
+          <Route path="/invitationPri" element={<InvitationPrivate/>} />
+          <Route path="/invitationPu" element={<InvitationPublic/>} />
           </Route>
 
           <Route path="/*" element={<NotFound/>} />
-          <Route path="/ip" element={<InvitationPublic />} />
 
         </Routes>
         </UserContext.Provider>

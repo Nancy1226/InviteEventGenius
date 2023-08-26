@@ -1,17 +1,74 @@
-import React from "react";
+import React, { useState} from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Label from "../atoms/Label";
 import InputText from "../atoms/InputText";
 import ButtonG from "../atoms/ButtonG";
 
 function ModalBolets({estado, cambiarEstado}) {
+    
+    const [ticketData, setTicketData] = useState({
+        basico: {
+            selected: false,
+            price: 0,
+        },
+        pro: {
+            selected: false,
+            price: 0,
+        },
+        premium: {
+            selected: false,
+            price: 0,
+        },
+    });
+    
+    const handleTicketChange = (type, selected) => {
+        setTicketData((prevData) => ({
+            ...prevData,
+            [type]: {
+            ...prevData[type],
+            selected,
+            },
+        }));
+    };
+    
+    const handlePriceChange = (type, price) => {
+        setTicketData((prevData) => ({
+            ...prevData,
+            [type]: {
+            ...prevData[type],
+            price,
+            },
+        }));
+    };
+    
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        try {
+          // Aquí puedes enviar ticketData a la API
+            const response = await axios.post("http://localhost:3002/registrarBoletos", {
+            tickets: ticketData,
+            });
+    
+          // Maneja la respuesta de la API según tus necesidades
+            console.log("Respuesta de la API:", response.data);
+    
+          // Cierra el modal después de enviar los datos
+            cambiarEstado(false);
+        } catch (error) {
+          // Maneja los errores
+            console.error("Error al enviar los boletos:", error);
+        }
+    };
+
     return (  
         <>
             {estado &&
                 <Overlay>
                     <ContentModel>
                         <ContentForm>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <ContentG>
                                     <Content1>
                                         <div className="label">
@@ -20,7 +77,7 @@ function ModalBolets({estado, cambiarEstado}) {
                                         <div className="content-option1">
                                             <div className="option1">
                                                 <div className="inputoption">
-                                                    <InputText type="radio" propsInputRadio/>
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.basico.selected}onChange={(e) => handleTicketChange("basico", e.target.checked)}/>
                                                 </div>
                                                 <div className="inputoption2">
                                                     <Label msn="Basico"/>
@@ -28,7 +85,7 @@ function ModalBolets({estado, cambiarEstado}) {
                                             </div>
                                             <div className="option1">
                                                 <div className="inputoption">
-                                                    <InputText type="radio" propsInputRadio/>
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.pro.selected} onChange={(e) => handleTicketChange("pro", e.target.checked)}/>
                                                 </div>
                                                 <div className="inputoption2">
                                                     <Label msn="Pro"/>
@@ -36,7 +93,7 @@ function ModalBolets({estado, cambiarEstado}) {
                                             </div>
                                             <div className="option1">
                                                 <div className="inputoption">
-                                                    <InputText type="radio" propsInputRadio/>
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.premium.selected} onChange={(e) => handleTicketChange("premium", e.target.checked)}/>
                                                 </div>
                                                 <div className="inputoption2">
                                                     <Label msn="Premium" />
@@ -49,9 +106,9 @@ function ModalBolets({estado, cambiarEstado}) {
                                             <Label msn="Precios"/>
                                         </div>
                                         <div className="price">
-                                            <InputText type="text" propsTextcort/>
-                                            <InputText type="text" propsTextcort/>
-                                            <InputText type="text" propsTextcort/>
+                                            <InputText type="text" propsTextcort value={ticketData.basico.price} onChange={(e) => handlePriceChange("basico", e.target.value)}/>
+                                            <InputText type="text" propsTextcort value={ticketData.pro.price} onChange={(e) => handlePriceChange("pro", e.target.value)}/>
+                                            <InputText type="text" propsTextcort value={ticketData.premium.price} onChange={(e) => handlePriceChange("premium", e.target.value)}/>
                                         </div>
                                     </Content2>
                                 </ContentG>
