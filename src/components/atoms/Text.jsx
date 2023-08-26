@@ -10,7 +10,7 @@ const Textstyled = styled.p`
         width: 100%;
         font-size: 2rem;
         margin: 0 2%;
-    `}
+    }
     ${props => props.$textinvited &&`
         color: black;
         font-size: 2rem;
@@ -18,15 +18,10 @@ const Textstyled = styled.p`
         font-style: normal;
         font-weight: 100;
     `}
-`;
 
-
-function Text({text, propsText, txtlogin, propsTextPagina, propsTextPagina2, txtRegister,  propsTextSub, textinvited}}) {
-    return ( 
-        <Textstyled $propsText = {propsText} $propsTextSub={propsTextSub} $txtlogin={txtlogin} $propsTextPagina={propsTextPagina} $propsTextPagina2={propsTextPagina2} $txtregister={txtRegister} >{text} </Textstyled>
-        ${props => props.$propsText &&`
-            color: black; 
-        `}
+    ${props => props.$propsText &&`
+                color: black; 
+     `}
 
         ${props => props.$propsTextSub &&`
             color: black;
@@ -60,6 +55,12 @@ function Text({text, propsText, txtlogin, propsTextPagina, propsTextPagina2, txt
             text-align: center;
         `}
 
+`;
+
+
+function Text({text, propsText, txtlogin, propsTextPagina, propsTextPagina2, txtRegister,  propsTextSub, textinvited}) {
+    return ( 
+        <Textstyled $propsText = {propsText} $propsTextSub={propsTextSub} $txtlogin={txtlogin} $propsTextPagina={propsTextPagina} $propsTextPagina2={propsTextPagina2} $txtregister={txtRegister} >{text} </Textstyled>
     );
 }
 

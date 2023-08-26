@@ -138,8 +138,6 @@ function BodyProfile() {
                             <h2>Tu foto de perfil</h2>
                         </StyledContainerH2>
                         <StyledContainerImg>
-
-                            <Image src={selectedImage ? URL.createObjectURL(selectedImage) : images.DefaultProfile} alt="Foto de Perfil" id="img" photoProfile/>
                             <div>
                                 {selectedFile&& (
                                     <Image src={URL} alt="Foto de perfil"/>
@@ -391,21 +389,4 @@ const StyledContainerThree = styled.div`
             align-items: center;
         }
     }
-
-    `;
-    /*<input type="file" accept="image/*" onChange={handleFileChange} style={{ display: "none" }} />
-    <button onClick={handleButtonClick}>Seleccionar imagen</button>
-    <label htmlFor="fileInput">Cambiar imagen</label>
-    <div>
-        {selectedImage && (
-            <Image src={selectedImage} alt="Foto de perfil"/>
-        )}
-        {!selectedImage && (
-            <Image src={images.DefaultProfile} alt="Foto de perfil"/>
-        )}
-    </div>
-    
-    
-    */
-
 `;

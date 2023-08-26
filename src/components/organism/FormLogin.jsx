@@ -191,7 +191,7 @@ function FormLogin() {
 
                 <Button disabled={isSubmitting} name={"Iniciar Sesion"} estilo={true}/>
                 <Content>
-                    <WrapperLink txt="¿Aun no tienes unacuenta? " to="/register" link="Que esperas, crea una ahora!" txtRegister propsLogin/>
+                    <WrapperLink txt="¿Aun no tienes una cuenta? " to="/register" link="Que esperas, crea una ahora!" txtRegister propsLogin/>
                 </Content>
                 <DivisionText>
                     <ContentText text="Unete a esta nueva experiencia y haz realidad tus pensamientos" propsPagina propsTextPagina2 />

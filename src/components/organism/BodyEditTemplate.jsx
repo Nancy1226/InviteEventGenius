@@ -8,7 +8,7 @@ import BarRight from "./BarRight";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: row;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 100%;
   height: 84vh;
 `;
@@ -220,6 +220,7 @@ function BodyEditTemplate() {
     <StyledContainer>
       <StyledContainerCanva>
       <StyledSubContainerCanva>
+        
       <label disabled={!cropImage}>
         <input
           disabled={!cropImage}
@@ -229,11 +230,9 @@ function BodyEditTemplate() {
         />
       </label>
 
-      <input accept="image/*" type="file" name="image" id="input" />
-
       <div
         style={{
-          border: `3px ${!cropImage ? "dotted" : "solid"} Green`,
+          border: `3px ${!cropImage ? "dotted" : ""} `,
           width: "100%",
           height: "95%"
         }}
