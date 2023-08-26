@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-function TittleG({msn}) {
+function TittleG({msn, propsTittle}) {
     return (  
-        <H1>{msn}</H1>
+        <H1 $propsTittle={propsTittle}>{msn}</H1>
     );
 }
 
@@ -13,4 +13,10 @@ const H1 = styled.h1`
     font-family: Inter;
     margin-bottom: 1%;
 
+    ${props =>props.$propsTittle && `
+        font-size: 3.5rem;
+        font-family: Inter;
+        font-weight: 100;
+        margin: 0 0 0 6%;
+    `}
 `;
