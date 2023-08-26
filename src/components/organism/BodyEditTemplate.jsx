@@ -1,6 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { fabric } from "fabric";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
+import styled from "styled-components";
+import Barup from "./Barup";
+import BarRight from "./BarRight";
+
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+  width: 100%;
+  height: 84vh;
+`;
+
+const StyledContainerCanva = styled.div`
+  background: #FCD8FF;
+  /* border: 8px solid wheat; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
+`
+const StyledSubContainerCanva = styled.div`
+  border: 2px solid black;
+  background: white;
+  width: 80%;
+  height: 80%;
+`;
 
 function BodyEditTemplate() {
   const { editor, onReady } = useFabricJSEditor();
@@ -77,7 +103,7 @@ function BodyEditTemplate() {
     }
 
     fabric.Image.fromURL(
-      "https://thegraphicsfairy.com/wp-content/uploads/2019/02/Anatomical-Heart-Illustration-Black-GraphicsFairy.jpg",
+      "      ",
       (image) => {
         editor.canvas.setBackgroundImage(
           image,
@@ -89,28 +115,7 @@ function BodyEditTemplate() {
 
   const fromSvg = () => {
     fabric.loadSVGFromString(
-      `<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="500" height="500" viewBox="0 0 500 500" xml:space="preserve">
-    <desc>Created with Fabric.js 5.3.0</desc>
-    <defs>
-    </defs>
-    <g transform="matrix(1 0 0 1 662.5 750)"  >
-      <image style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  xlink:href="https://thegraphicsfairy.com/wp-content/uploads/2019/02/Anatomical-Heart-Illustration-Black-GraphicsFairy.jpg" x="-662.5" y="-750" width="1325" height="1500"></image>
-    </g>
-    <g transform="matrix(1 0 0 1 120.5 120.5)"  >
-    <circle style="stroke: rgb(53,54,58); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  cx="0" cy="0" r="20" />
-    </g>
-    <g transform="matrix(1 0 0 1 245.5 200.5)"  >
-    <line style="stroke: rgb(53,54,58); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;"  x1="-75" y1="-50" x2="75" y2="50" />
-    </g>
-    <g transform="matrix(1 0 0 1 141.4 220.03)" style=""  >
-        <text xml:space="preserve" font-family="Arial" font-size="16" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(53,54,58); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-16.9" y="-5.46" >inset</tspan><tspan x="-16.9" y="15.51" >text</tspan></text>
-    </g>
-    <g transform="matrix(1 0 0 1 268.5 98.5)"  >
-    <rect style="stroke: rgb(53,54,58); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-opacity: 0; fill-rule: nonzero; opacity: 1;"  x="-20" y="-20" rx="0" ry="0" width="40" height="40" />
-    </g>
-    </svg>`,
+      ``,
       (objects, options) => {
         editor.canvas._objects.splice(0, editor.canvas._objects.length);
         editor.canvas.backgroundImage = objects[0];
@@ -128,17 +133,13 @@ function BodyEditTemplate() {
     if (!editor || !fabric) {
       return;
     }
-    editor.canvas.setHeight(500);
-    editor.canvas.setWidth(500);
+    editor.canvas.setHeight(innerHeight - 200);
+    editor.canvas.setWidth(innerWidth - 100);
     addBackground();
     editor.canvas.renderAll();
   }, [editor?.canvas.backgroundImage]);
 
-  const toggleSize = () => {
-    editor.canvas.freeDrawingBrush.width === 12
-      ? (editor.canvas.freeDrawingBrush.width = 5)
-      : (editor.canvas.freeDrawingBrush.width = 12);
-  };
+
 
   useEffect(() => {
     if (!editor || !fabric) {
@@ -150,17 +151,6 @@ function BodyEditTemplate() {
 
   const toggleDraw = () => {
     editor.canvas.isDrawingMode = !editor.canvas.isDrawingMode;
-  };
-  const undo = () => {
-    if (editor.canvas._objects.length > 0) {
-      history.push(editor.canvas._objects.pop());
-    }
-    editor.canvas.renderAll();
-  };
-  const redo = () => {
-    if (history.length > 0) {
-      editor.canvas.add(history.pop());
-    }
   };
 
   const clear = () => {
@@ -175,13 +165,10 @@ function BodyEditTemplate() {
 
   const onAddCircle = () => {
     editor.addCircle();
-    editor.addLine();
   };
-  const onAddRectangle = () => {
-    editor.addRectangle();
-  };
+
   const addText = () => {
-    editor.addText("inset text");
+    editor.addText("inserte texto");
   };
 
   const exportSVG = () => {
@@ -189,35 +176,50 @@ function BodyEditTemplate() {
     console.info(svg);
   };
 
+  const addImage = (evnt) =>{
+    const file = evnt.target.files[0];
+    const url = url.createObjectURL();
+    const imgNode = new Image();
+    imgNode.src = url;
+    imgNode.onload = () =>{
+      const img = new fabric.Image(imgNode,{
+        left: 100,
+        top: 100,
+        angle: 30,
+        opacity: 1,
+      });
+      canvas.add(img)
+    };
+  }
+
+  const btnOnclick = () =>{
+    const dataURL = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.download = "yutu";
+    a.href = dataURL;
+    a.click();
+  }
+
+  const handleDownload = () => {
+        const imgDataUrl = editor.canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = imgDataUrl;
+        downloadLink.download = 'fabric_canvas_image.png';
+        downloadLink.target = '_blank';
+        downloadLink.click();
+        const canvasData = editor.canvas.toJSON(); 
+        const canvasDataJson = JSON.stringify(canvasData);
+        
+        console.log(canvasDataJson);
+
+    };
+
   return (
-    <div className="App">
-      <h1>FabricJS React Sample</h1>
-      <button onClick={onAddCircle}>Add circle</button>
-      <button onClick={onAddRectangle} disabled={!cropImage}>
-        Add Rectangle
-      </button>
-      <button onClick={addText} disabled={!cropImage}>
-        Add Text
-      </button>
-      <button onClick={toggleDraw} disabled={!cropImage}>
-        Toggle draw
-      </button>
-      <button onClick={clear} disabled={!cropImage}>
-        Clear
-      </button>
-      <button onClick={undo} disabled={!cropImage}>
-        Undo
-      </button>
-      <button onClick={redo} disabled={!cropImage}>
-        Redo
-      </button>
-      <button onClick={toggleSize} disabled={!cropImage}>
-        ToggleSize
-      </button>
-      <button onClick={removeSelectedObject} disabled={!cropImage}>
-        Delete
-      </button>
-      <button onClick={(e) => setCropImage(!cropImage)}>Crop</button>
+    <>
+      <Barup funcionDelete={clear} funcion4={handleDownload} />
+    <StyledContainer>
+      <StyledContainerCanva>
+      <StyledSubContainerCanva>
       <label disabled={!cropImage}>
         <input
           disabled={!cropImage}
@@ -226,24 +228,25 @@ function BodyEditTemplate() {
           onChange={(e) => setColor(e.target.value)}
         />
       </label>
-      <button onClick={exportSVG} disabled={!cropImage}>
-        {" "}
-        ToSVG
-      </button>
-      <button onClick={fromSvg} disabled={!cropImage}>
-        fromsvg
-      </button>
+
+      <input accept="image/*" type="file" name="image" id="input" />
 
       <div
         style={{
           border: `3px ${!cropImage ? "dotted" : "solid"} Green`,
-          width: "500px",
-          height: "500px"
+          width: "100%",
+          height: "95%"
         }}
-      >
+        >
         <FabricJSCanvas className="sample-canvas" onReady={onReady} />
       </div>
-    </div>
+
+      </StyledSubContainerCanva>
+    </StyledContainerCanva>
+
+    <BarRight addText={addText} draw={toggleDraw} circle={onAddCircle} clean={removeSelectedObject} />
+    </StyledContainer>
+    </>
   );
 }
 

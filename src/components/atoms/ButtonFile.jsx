@@ -14,16 +14,28 @@ const Button = styled.button`
             font-weight: 400;
             line-height: normal;
         `}
+
+        ${props =>props.$buttonDownland && `
+            color: #ffff;
+            text-align: center;
+            font-family: 'Inter';
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        `}
     }
 `;
 
-function ButtonFile({msn, accept, onClick, className, buttonfile, id}) {
+
+function ButtonFile({msn, accept, onClick, className, buttonfile, id, value, buttonDownland}) {
     return ( 
-        <Button type="button" onClick={onClick} className={className} $buttonfile={buttonfile}>
+        <Button type="button" onClick={onClick} className={className} $buttonfile={buttonfile} $buttonDownland={buttonDownland}>
             {msn}
-            <input type="file" accept={accept} id={id} />
+            <input type="file" accept={accept} id={id} value={value} />
+
         </Button>
-     );
+    );
 }
 
 export default ButtonFile;

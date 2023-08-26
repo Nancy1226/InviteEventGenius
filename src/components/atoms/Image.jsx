@@ -23,7 +23,9 @@ const StyledImg = styled.img`
 
 function Image({ src, imgConf, id, photoProfile, imgGroup}) {
   return (
-    <StyledImg src={src} id={id} $imgConf={imgConf} $photoProfile={photoProfile} $imgGroup={imgGroup}/>
+    <>
+<StyledImg src={src} id={id} $imgConf={imgConf} $photoProfile={photoProfile} $imgGroup={imgGroup}/>
+    </>
   );
 }
 

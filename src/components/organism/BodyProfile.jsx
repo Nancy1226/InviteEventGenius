@@ -1,23 +1,68 @@
 import { useState } from "react";
 import { images } from "../../images/images";
-import { useEffect } from "react";
 import axios from "axios";
+import {useContext} from "react";
+import {useEffect} from "react";
+import UserContext from "../../context/UserContext";
 import styled from "styled-components";
 import Image from "../atoms/Image";
 import Button from "../atoms/Button";
 import InputText from "../atoms/InputText";
 import ButtonFile from "../atoms/ButtonFile";
 
-function BodyProfile() {
 
-    const [selectedImage, setSelectedImage] = useState(null);
+function BodyProfile() {    
+    const [selectedFile, setSelectedFile] = useState(null);
     const [name, setName] = useState("");
     const [showInput, setShowInput] = useState(false);
+    const {userName, setUserName} = useContext(UserContext);
+    const {setIsLoged} = useContext(UserContext);
+    const [dataApi, setDataApi] = useState({});
+
+    useEffect(() => {
+        // console.log("Obteniendo la imagen")
+        obtenerImagen(); 
+      },[]);
+
+    const obtenerImagen = async () => {
+        const response = await axios.get(`http://localhost:3002/photoUser/${userName}`)
+       
+        const base64Image = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+  
+          setDataApi(`data:image/jpeg;base64,${base64Image}`);
+
+        // setDataApi(response.data);
+        console.log("imprimiendo el estado "+dataApi);
+    }
+
 
     const handleImageSelect = (e) => {
         setSelectedImage(e.target.files[0]);
     };
+  
+    const handleFileChange = async (e) => {
+        // Obtener el archivo seleccionado
+        const file = e.target.files[0];
+        // Actualizar el estado con el archivo
+        setSelectedFile(file);
+      
+        try {
+            // Intentar crear la url con el valor de selectFile
+            const URL = URL.createObjectURL(selectedFile);
+            // const response = await axios.put(`http://localhost:3002/UserUpdatePhoto/${userName}`)
 
+            // Hacer algo con la url ...
+        } catch (error) {
+            // Mostrar el error o hacer otra cosa
+            console.error("No se puede seleccionar el archivo");
+        }          
+      };
+  
     const handleUpload = async () => {
         if (selectedImage) {
             const formData = new FormData();
@@ -71,6 +116,7 @@ function BodyProfile() {
 
     const handleShowInput =async () =>{
         setShowInput(true);
+
     }
 
     const handleCancel = async () =>{
@@ -92,7 +138,19 @@ function BodyProfile() {
                             <h2>Tu foto de perfil</h2>
                         </StyledContainerH2>
                         <StyledContainerImg>
+
                             <Image src={selectedImage ? URL.createObjectURL(selectedImage) : images.DefaultProfile} alt="Foto de Perfil" id="img" photoProfile/>
+                            <div>
+                                {selectedFile&& (
+                                    <Image src={URL} alt="Foto de perfil"/>
+                                )}
+                                {!selectedFile && (
+                                    <Image src={dataApi} alt="Foto de perfil" />
+                                    
+                                    // <image src={dataApi.photo}></image>
+                                )}
+                            </div>
+
                         </StyledContainerImg>
                     </StyledContainerProfile>
                     <StyledContainerButtons>
@@ -105,7 +163,9 @@ function BodyProfile() {
                     <StyledContainerInfo>
                         <h1>Informacion</h1>
                         <h2>Nombre</h2>
-                        {!showInput && <p>{name}</p>}
+                        {/* {!showInput && <p>{name}</p>} */}
+                        {/* <p>{dataApi.nameuser}</p> */}
+                        <p>{}</p>
                     </StyledContainerInfo>
                     <StyledContainerButton>
                         <Button name={"Editar nombre"} estilo={true} onClick={handleShowInput} buttonUpdate/>
@@ -127,9 +187,11 @@ function BodyProfile() {
             </StyledSubContainer>
         </StyledContainer>
     </>
-);}
+    );
+}
 
-export default BodyProfile;
+
+export default (BodyProfile);
 
 const StyledContainer = styled.div`
     background:#FCD8FF;
@@ -329,6 +391,7 @@ const StyledContainerThree = styled.div`
             align-items: center;
         }
     }
+
     `;
     /*<input type="file" accept="image/*" onChange={handleFileChange} style={{ display: "none" }} />
     <button onClick={handleButtonClick}>Seleccionar imagen</button>
@@ -344,3 +407,5 @@ const StyledContainerThree = styled.div`
     
     
     */
+
+`;

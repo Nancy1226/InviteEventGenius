@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-function InputText({ inputUpdateName, className, inputFile, type, placeholder, name, id, dato, valor, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio }) {
+
+function InputText({ inputUpdateName, className, inputFile, type, placeholder, name, id, propsInput, propsText, propsFile, accept, propsCantNumber, propsDate, propsTime, propsTextcort, propsInputRadio, onClick, value, onChange, checked, propsRadio }) {
     return (  
         <>
             <StyledContainerInput>
@@ -10,8 +11,9 @@ function InputText({ inputUpdateName, className, inputFile, type, placeholder, n
                 placeholder={placeholder}
                 name={name}
                 id={id}
-                value={dato}
-                onChange={valor}
+                value={value}
+                onClick={onClick}
+                onChange={onChange}
                 $propsInput={propsInput}
                 $propsInputRadio={propsInputRadio}
                 $propsText={propsText}
@@ -23,6 +25,8 @@ function InputText({ inputUpdateName, className, inputFile, type, placeholder, n
                 $propsTextcort={propsTextcort}
                 $inputFile={inputFile}
                 $inputUpdateName={inputUpdateName}
+                checked={checked}
+                $propsRadio={propsRadio}
                 />
             </StyledContainerInput>
         </>
@@ -93,6 +97,8 @@ const StyledInput = styled.input`
 
         ${props => props.$propsFile &&`
             width: 70%;
+            border: none;
+            background-color: #5138EE;
         `}
 
         ${props => props.$propsDate &&`
@@ -112,7 +118,9 @@ const StyledInput = styled.input`
         `}
 
         ${props => props.$propsInputRadio &&`
+            background-color: darkgreen;
             width: 100%;
+            border: 0.3vh solid black;
         `}
 
         ${props =>props.$inputFile && `
@@ -122,6 +130,10 @@ const StyledInput = styled.input`
             color: black;
             width: 100%;
             height: 5vh;
+        `}
+
+        ${props =>props.$propsRadio && `
+            width: 45%;
         `}
     }
 `;

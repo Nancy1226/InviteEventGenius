@@ -1,65 +1,124 @@
-import React from "react";
+import React, { useState} from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Label from "../atoms/Label";
 import InputText from "../atoms/InputText";
-import Button from "../atoms/Button";
+import ButtonG from "../atoms/ButtonG";
 
-function ModalBolets({estado}) {
+function ModalBolets({estado, cambiarEstado}) {
+    
+    const [ticketData, setTicketData] = useState({
+        basico: {
+            selected: false,
+            price: 0,
+        },
+        pro: {
+            selected: false,
+            price: 0,
+        },
+        premium: {
+            selected: false,
+            price: 0,
+        },
+    });
+    
+    const handleTicketChange = (type, selected) => {
+        setTicketData((prevData) => ({
+            ...prevData,
+            [type]: {
+            ...prevData[type],
+            selected,
+            },
+        }));
+    };
+    
+    const handlePriceChange = (type, price) => {
+        setTicketData((prevData) => ({
+            ...prevData,
+            [type]: {
+            ...prevData[type],
+            price,
+            },
+        }));
+    };
+    
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        try {
+          // Aquí puedes enviar ticketData a la API
+            const response = await axios.post("http://localhost:3002/registrarBoletos", {
+            tickets: ticketData,
+            });
+    
+          // Maneja la respuesta de la API según tus necesidades
+            console.log("Respuesta de la API:", response.data);
+    
+          // Cierra el modal después de enviar los datos
+            cambiarEstado(false);
+        } catch (error) {
+          // Maneja los errores
+            console.error("Error al enviar los boletos:", error);
+        }
+    };
+
     return (  
         <>
             {estado &&
                 <Overlay>
                     <ContentModel>
                         <ContentForm>
-                            <form>
-                                <Content1>
-                                    <div className="label">
-                                        <Label msn="Boletos"/>
-                                    </div>
-                                    <div className="content-option1">
-                                        <div className="option1">
-                                            <div className="inputoption">
-                                                <InputText type="radio" propsInputRadio name="name"/>
-                                            </div>
-                                            <div className="inputoption">
-                                                <Label msn="Basico"/>
-                                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <ContentG>
+                                    <Content1>
+                                        <div className="label">
+                                            <Label msn="Boletos"/>
                                         </div>
-                                        <div className="option1">
-                                            <div className="inputoption">
-                                                    <InputText type="radio" propsInputRadio name="name"/>
-                                                </div>
+                                        <div className="content-option1">
+                                            <div className="option1">
                                                 <div className="inputoption">
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.basico.selected}onChange={(e) => handleTicketChange("basico", e.target.checked)}/>
+                                                </div>
+                                                <div className="inputoption2">
+                                                    <Label msn="Basico"/>
+                                                </div>
+                                            </div>
+                                            <div className="option1">
+                                                <div className="inputoption">
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.pro.selected} onChange={(e) => handleTicketChange("pro", e.target.checked)}/>
+                                                </div>
+                                                <div className="inputoption2">
                                                     <Label msn="Pro"/>
                                                 </div>
                                             </div>
-                                        <div className="option1">
-                                            <div className="inputoption">
-                                                    <InputText type="radio" propsInputRadio name="name"/>
-                                                </div>
+                                            <div className="option1">
                                                 <div className="inputoption">
-                                                    <Label msn="Premium"/>
+                                                    <InputText type="radio" propsInputRadio checked={ticketData.premium.selected} onChange={(e) => handleTicketChange("premium", e.target.checked)}/>
+                                                </div>
+                                                <div className="inputoption2">
+                                                    <Label msn="Premium" />
                                                 </div>
                                             </div>
-                                    </div>
-                                </Content1>
-                                <Content2>
-                                    <div className="label">
-                                        <Label msn="Precios"/>
-                                    </div>
-                                    <div className="price">
-                                        <InputText type="text" propsTextcort/>
-                                        <InputText type="text" propsTextcort/>
-                                        <InputText type="text" propsTextcort/>
-                                    </div>
-                                </Content2>
+                                        </div>
+                                    </Content1>
+                                    <Content2>
+                                        <div className="label">
+                                            <Label msn="Precios"/>
+                                        </div>
+                                        <div className="price">
+                                            <InputText type="text" propsTextcort value={ticketData.basico.price} onChange={(e) => handlePriceChange("basico", e.target.value)}/>
+                                            <InputText type="text" propsTextcort value={ticketData.pro.price} onChange={(e) => handlePriceChange("pro", e.target.value)}/>
+                                            <InputText type="text" propsTextcort value={ticketData.premium.price} onChange={(e) => handlePriceChange("premium", e.target.value)}/>
+                                        </div>
+                                    </Content2>
+                                </ContentG>
                                 <Content3>
-                                    <div>
+                                    <div className="father">
                                         <div className="button">
-                                            <Button funcion="" name={"Cancelar"} propsButton/>
+                                            <ButtonG name={"Cancelar"} onClick={() => cambiarEstado(false)} propsButton4/>
                                         </div>
                                         <div className="button">
-                                            <Button funcion="" name={"Cancelar"} propsButton/>
+                                            <ButtonG name={"Guardar"} propsButton4/>
                                         </div>
                                     </div>
                                 </Content3>
@@ -107,7 +166,7 @@ const ContentModel = styled.div`
     min-height: 100px;
     position: relative;
     border-radius: 30px;
-    background: #f0f0f0;
+    background: #ffffff;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.75);
     padding: 25px 10px;
     }
@@ -118,6 +177,7 @@ const ContentForm = styled.div`
     form{
         display: flex;
         align-items: center;
+        flex-direction: column;
         justify-content: center;
         height: 63.5vh;
     }
@@ -140,10 +200,12 @@ const Content1 = styled.div`
             gap: 7vh;
             align-items: center;
             width: 100%;
-            height: 13vh;
-            display: flex;
+            height: 15vh;
             .inputoption {
-                width: 50%;
+                width: 30%;
+            }
+            .inputoption2 {
+                width: 60%;
             }
         }
     }
@@ -174,17 +236,25 @@ const Content2 = styled.div`
 `;
 
 const Content3 = styled.div` 
-    background-color: darkgoldenrod;
     width: 100%;
     display: flex;
     height: 63.5vh;
-    
-    .button {
-        width: 50%;
-        background-color: darkseagreen;
+
+    .father {
+        width: 100%;
+        height: 15vh;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        .button {
+            width: 50%;
+            height: 15vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
+`;
+
+const ContentG = styled.div`
+    display: flex;
+    margin:  20% 0 0 0;
 `;
