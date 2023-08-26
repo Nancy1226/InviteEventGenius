@@ -24,7 +24,7 @@ const StyledContainer = styled.div`
   width: 100vw;
   height: 100vh;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) { 
     display: flex;
     align-items: center;
     justify-content: center;

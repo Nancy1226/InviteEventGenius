@@ -18,16 +18,27 @@ function BodyProfile() {
     const [dataApi, setDataApi] = useState({});
 
     useEffect(() => {
-        console.log("Obteniendo la tarjeta")
+        // console.log("Obteniendo la imagen")
         obtenerImagen(); 
-      }, []);
+      },[]);
 
     const obtenerImagen = async () => {
-        console.log("Logica para el axios");
+        const response = await axios.get(`http://localhost:3002/photoUser/${userName}`)
+       
+        const base64Image = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ''
+            )
+          );
+  
+          setDataApi(`data:image/jpeg;base64,${base64Image}`);
+
         // setDataApi(response.data);
+        console.log("imprimiendo el estado "+dataApi);
     }
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         // Obtener el archivo seleccionado
         const file = e.target.files[0];
         // Actualizar el estado con el archivo
@@ -36,6 +47,8 @@ function BodyProfile() {
         try {
             // Intentar crear la url con el valor de selectFile
             const URL = URL.createObjectURL(selectedFile);
+            // const response = await axios.put(`http://localhost:3002/UserUpdatePhoto/${userName}`)
+
             // Hacer algo con la url ...
         } catch (error) {
             // Mostrar el error o hacer otra cosa
@@ -96,6 +109,7 @@ function BodyProfile() {
 
     const handleShowInput = () =>{
         setShowInput(true);
+
     }
 
     return ( 
@@ -118,7 +132,9 @@ function BodyProfile() {
                                     <Image src={URL} alt="Foto de perfil"/>
                                 )}
                                 {!selectedFile && (
-                                    <Image src={images.profile} alt="Foto de perfil"/>
+                                    <Image src={dataApi} alt="Foto de perfil" />
+                                    
+                                    // <image src={dataApi.photo}></image>
                                 )}
                             </div>
                         </StyledContainerImg>
@@ -134,7 +150,8 @@ function BodyProfile() {
                         <h1>Informacion</h1>
                         <h2>Nombre</h2>
                         {/* {!showInput && <p>{name}</p>} */}
-                        <p>{userName}</p>
+                        {/* <p>{dataApi.nameuser}</p> */}
+                        <p>{}</p>
                     </StyledContainerInfo>
                     <StyledContainerButton>
                         <Button name={"Editar nombre"} estilo={true} onClick={handleShowInput} buttonUpdate/>

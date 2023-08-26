@@ -13,7 +13,7 @@ const StyledImg = styled.img`
 function Image({ src, imgConf }) {
   return (
     <>
-      <StyledImg src={src} $imgConf={imgConf}/>
+      <StyledImg src={src} $imgConf={imgConf} />
     </>
   );
 }
