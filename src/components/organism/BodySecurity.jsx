@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from 'react';
 import Button from "../atoms/Button";
 import ModalSecurity from "./ModalSecurity"; 
+import axios from "axios";
 
 const StyledContainer = styled.div`
   background: #fcd8ff;
@@ -199,15 +200,28 @@ function BodySecurity() {
 
     const [showInput, setShowInput] = useState(false);
 
-    const handlerEmailUpdate = () => {
+    const handlerUpdateEmail = async (event) =>{
+      setEmail(event.target.value);
+    };
 
-
+    const handlerUpdate = async () => {
       try {
-        
+        const respons = await axios.put("", {email});
+        setEmail(respons.data.email);
+        alert("El correo se ha cambiado con éxito");
       } catch (error) {
-          alert("Lo sentimos, no se pudo cambiar el correo")
+        alert("El correo no se pudo cambiar");
       }
-    }
+    };
+
+    const handlerShowActive = async () =>{
+      setShowInput(true);
+    };
+
+    const handlerShowCancel = async () =>{
+      setShowInput(false)
+    };
+
     return (
       <>
         <StyledContainer>
@@ -242,14 +256,22 @@ function BodySecurity() {
                 deberá ingresar su palabra clave.
               </p>
               <StyledContainerButton>
-                { showInput &&
-                    <p>{email}</p>
-                }
-                <Button name={"Editar Correo"} onClick={handlerEmailUpdate}/>
+                <p>{email}</p>
+                <Button name={"Editar Correo"} onClick={handlerShowActive}/>
               </StyledContainerButton>
             </StyledContainerTwo>
             <ContainerUpdateEmail>
-
+                { showInput && (
+                  <constentOpcion>
+                    <contentInput>
+                      <input type="text" placeholder="Escribe tu nuevo correo" value={email} onChange={handlerUpdateEmail}/>
+                    </contentInput>
+                    <ContentButton>
+                      <button type="button" onClick={handlerUpdate}>Actializar</button>
+                      <button type="button" onClick={handlerShowCancel}>Cancelar</button>
+                    </ContentButton>
+                  </constentOpcion>
+                )}
             </ContainerUpdateEmail>
             <StyledContainerTree>
               <h2>Eliminacion</h2>

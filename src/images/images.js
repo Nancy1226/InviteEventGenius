@@ -2,6 +2,8 @@ export const images = {
     //images
     child:"imgs/happyChild.svg",
     corean:"imgs/happyCorean.svg",
+    DefaultProfile:"imgs/notImgDefault.jpg",
+    templateOne:"imgs/DesignerTemplateOne.jpeg",
   
     //icons
     line1:"imgs/line1.svg",
@@ -15,4 +17,5 @@ export const images = {
     security:"imgs/security.svg",
     pay:"imgs/pay.svg",
     cart:"imgs/cart.svg",
+    group:"imgs/group.svg",
 };

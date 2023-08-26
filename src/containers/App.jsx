@@ -5,7 +5,7 @@ import Profile from "../pages/Profile";
 import EventPublic from "../pages/EventPublic";
 import EventPrivate from "../pages/EventPrivate";
 import Segurity from "../pages/Segurity";
-
+import Invitation from "../pages/Invitattion";
 
 function App() {
 
@@ -19,6 +19,7 @@ function App() {
           <Route path="/segurity" element={<Segurity/>}/>
           <Route path="/eventp" element={<EventPublic/>} />
           <Route path="/eventpr" element={<EventPrivate/>} />
+          <Route path="/invited" element={<Invitation/>}/>
         </Routes>
       </BrowserRouter>
     </>

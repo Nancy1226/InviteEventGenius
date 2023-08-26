@@ -17,11 +17,11 @@ const Button = styled.button`
     }
 `;
 
-function ButtonFile({msn, accept, onClick, className, buttonfile}) {
+function ButtonFile({msn, accept, onClick, className, buttonfile, id}) {
     return ( 
         <Button type="button" onClick={onClick} className={className} $buttonfile={buttonfile}>
             {msn}
-            <input type="file" accept={accept} />
+            <input type="file" accept={accept} id={id} />
         </Button>
      );
 }
