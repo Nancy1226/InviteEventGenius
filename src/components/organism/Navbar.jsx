@@ -18,8 +18,8 @@ function Navbar() {
               Inicio
             </NavLink>
 
-            <NavLink to={"/"} className='styledNav'>
-              Mis diseños
+            <NavLink to={"/EditTemplate"} className='styledNav'>
+              Invitacion
             </NavLink>
 
             <NavLink to={"/"} className='styledNav'>
